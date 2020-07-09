@@ -1,5 +1,6 @@
 package com.example.mobooks;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +23,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private ArrayList<DataManager> mDataset;
+    ArrayList<DataManager> mDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
 
         recyclerView = findViewById(R.id.rvBooks);
         ArrayList<DataManager> bookTile = new ArrayList<>();
-        bookTile.add(new DataManager("Java for Absolute Beginners", "Iuliana Cosmina"));
+        bookTile.add(new DataManager("Bob Marley Biography", "Iuliana Cosmina"));
         bookTile.add(new DataManager("Android Cookbook", "Ian F. Darwin"));
         bookTile.add(new DataManager("Linux Bible", "Christopher Negus"));
         bookTile.add(new DataManager("The Richest Man In Babylon", "George S Classon"));
@@ -74,11 +76,16 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         return super.onOptionsItemSelected(item);
     }
 
-    private static final String TAG = "HomeActivity";
     //Click listener
     @Override
     public void onBookClick(int position) {
-        Log.d(TAG, "onBookClick: clicked " + position);
+
+        ArrayList<DataManager> dataManager = new ArrayList<DataManager>();
+
         Toast.makeText(this, "Clicked: " + position, Toast.LENGTH_SHORT).show();
+
+        Intent start = new Intent(getApplicationContext(), PdfViewerActivity.class);
+        start.putExtra("pdfFileName", mDataset);
+        startActivity(start);
     }
 }
