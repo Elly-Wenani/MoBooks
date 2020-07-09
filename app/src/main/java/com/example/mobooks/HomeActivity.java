@@ -7,17 +7,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity{
+public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBookClickListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    //BooksAdapter mAdapter;
+
+    private ArrayList<DataManager> mDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +49,8 @@ public class HomeActivity extends AppCompatActivity{
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
-        mAdapter = new BooksAdapter(this, bookTile);
+        // specify an adapter
+        mAdapter = new BooksAdapter(this, bookTile, this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -68,5 +72,13 @@ public class HomeActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private static final String TAG = "HomeActivity";
+    //Click listener
+    @Override
+    public void onBookClick(int position) {
+        Log.d(TAG, "onBookClick: clicked " + position);
+        Toast.makeText(this, "Clicked: " + position, Toast.LENGTH_SHORT).show();
     }
 }
