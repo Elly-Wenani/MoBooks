@@ -22,4 +22,16 @@ public class DataManager {
     public int getBookImage() {
         return bookImage;
     }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public void setBookImage(int bookImage) {
+        this.bookImage = bookImage;
+    }
 }

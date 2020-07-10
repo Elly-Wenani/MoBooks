@@ -23,8 +23,6 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<DataManager> mDataset;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +76,17 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
 
     //Click listener
     @Override
-    public void onBookClick(int position) {
+    public void onBookClick(View v, int position) {
+        //Toast.makeText(this, "Clicked: " + position, Toast.LENGTH_SHORT).show();
 
-        ArrayList<DataManager> dataManager = new ArrayList<DataManager>();
+        ArrayList<BooksAdapter> list = new ArrayList<>();
 
-        Toast.makeText(this, "Clicked: " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
+        intent.putExtra("pdfFileName", list);
+        v.getContext().startActivity(intent);
 
-        Intent start = new Intent(getApplicationContext(), PdfViewerActivity.class);
-        start.putExtra("pdfFileName", mDataset);
-        startActivity(start);
+//        Intent intent = new Intent(this, PdfViewerActivity.class);
+//        intent.putExtra("title", dataManager);
+//        this.startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mobooks;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -26,45 +27,55 @@ public class PdfViewerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mPDFView = findViewById(R.id.pdfViewer);
-        String getItem = getIntent().getStringExtra("pdfFileName");
-        //String getItem = getIntent().getExtras().getString("pdfFileName");
+        //String title = getIntent().getStringExtra("pdfFileName");
+        //String title = getIntent().getExtras().getString("pdfFileName");
+
+        Intent intent = this.getIntent();
+        //String title = intent.getExtras().getString("pdfFileName");
+        String title = getIntent().getStringExtra("pdfFileName");
+        //String title = getIntent().getStringExtra("pdfFileName");
 
 
-        mPDFView.fromAsset("Bob_Marley_A_Biography.pdf")
-                .defaultPage(0)
-                    .enableAnnotationRendering(true)
-                    .scrollHandle(new DefaultScrollHandle(this))
-                    .spacing(0)
-                    .enableSwipe(true)
-                    .swipeHorizontal(false)
-                    .enableAntialiasing(true)
-                    .onPageError(new OnPageErrorListener() {
-                        @Override
-                        public void onPageError(int page, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "Page error!", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .onError(new OnErrorListener() {
-                        @Override
-                        public void onError(Throwable t) {
-                            Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .onRender(new OnRenderListener() {
-                        @Override
-                        public void onInitiallyRendered(int nbPages, float pageWidth, float pageHeight) {
-                            mPDFView.fitToWidth();
-                        }
-                    })
-                    .load();
+        if (title == null) {
+            Toast.makeText(this, "Null title", Toast.LENGTH_SHORT).show();
+        }
+
+//        if (title.equals("Bob Marley Biography")) {
+//            Toast.makeText(this, "Bob!!!", Toast.LENGTH_SHORT).show();
+//        }
+//
+        else {
+            Toast.makeText(this, "No match", Toast.LENGTH_SHORT).show();
+        }
 
 
-
-
-
-
-
-
+//        mPDFView.fromAsset("Bob_Marley_A_Biography.pdf")
+//                .defaultPage(0)
+//                    .enableAnnotationRendering(true)
+//                    .scrollHandle(new DefaultScrollHandle(this))
+//                    .spacing(0)
+//                    .enableSwipe(true)
+//                    .swipeHorizontal(false)
+//                    .enableAntialiasing(true)
+//                    .onPageError(new OnPageErrorListener() {
+//                        @Override
+//                        public void onPageError(int page, Throwable t) {
+//                            Toast.makeText(getApplicationContext(), "Page error!", Toast.LENGTH_SHORT).show();
+//                        }
+//                    })
+//                    .onError(new OnErrorListener() {
+//                        @Override
+//                        public void onError(Throwable t) {
+//                            Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+//                        }
+//                    })
+//                    .onRender(new OnRenderListener() {
+//                        @Override
+//                        public void onInitiallyRendered(int nbPages, float pageWidth, float pageHeight) {
+//                            mPDFView.fitToWidth();
+//                        }
+//                    })
+//                    .load();
 
 
 //        if (getItem.equals("Bob Marley Biography")){

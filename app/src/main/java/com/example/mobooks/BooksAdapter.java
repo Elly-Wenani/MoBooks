@@ -1,6 +1,8 @@
 package com.example.mobooks;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> 
 //        mDataset = myDataset;
 //    }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_books_items, parent, false);
@@ -66,11 +69,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            mOnBookClickListener.onBookClick(getAdapterPosition());
+            mOnBookClickListener.onBookClick(v, getAdapterPosition());
         }
     }
 
     public interface OnBookClickListener{
-        void onBookClick(int position);
+        void onBookClick(View v, int position);
     }
 }
