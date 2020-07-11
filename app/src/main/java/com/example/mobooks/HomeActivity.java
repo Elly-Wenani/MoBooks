@@ -29,13 +29,12 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBookClickListener {
 
-    RecyclerView recyclerView;
-    //private RecyclerView.Adapter mAdapter;
-    BooksAdapter mAdapter;
-    RecyclerView.LayoutManager layoutManager;
-    public ArrayList<DataManager> bookTile;
+    private RecyclerView recyclerView;
+    private BooksAdapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private PDFView mPDFView;
+    private ArrayList<DataManager> bookTile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +43,13 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Hooks
         mPDFView = findViewById(R.id.pdfViewer);
+        recyclerView = findViewById(R.id.rvBooks);
 
+        //Populate recycler view
         bookTile = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.rvBooks);
-        //ArrayList<DataManager> bookTile = new ArrayList<>();
         bookTile.add(new DataManager("Bob Marley Biography", "Iuliana Cosmina"));
         bookTile.add(new DataManager("Wealth Without Theft", "Kolawole Oyeyemi"));
         bookTile.add(new DataManager("Linux Bible", "Christopher Negus"));
@@ -63,15 +63,13 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         bookTile.add(new DataManager("I kissed dating goodbye", "Joshua Harris"));
         bookTile.add(new DataManager("Money with a Mission", "Dr. Leroy Thompson Sr"));
 
-        // use a linear layout manager
+        // Linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter
+        // specifying an adapter
         mAdapter = new BooksAdapter(this, bookTile, this);
         recyclerView.setAdapter(mAdapter);
-
-
     }
 
 

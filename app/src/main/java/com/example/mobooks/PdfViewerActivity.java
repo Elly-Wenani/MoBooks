@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class PdfViewerActivity extends AppCompatActivity {
 
     private PDFView mPDFView;
-    TextView nothingToShow;
+    private TextView nothingToShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
