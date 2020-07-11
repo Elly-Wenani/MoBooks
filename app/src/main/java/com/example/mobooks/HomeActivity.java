@@ -10,18 +10,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnErrorListener;
+import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
+import com.github.barteksc.pdfviewer.listener.OnRenderListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBookClickListener {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView;
+    //private RecyclerView.Adapter mAdapter;
+    BooksAdapter mAdapter;
+    RecyclerView.LayoutManager layoutManager;
+    public ArrayList<DataManager> bookTile;
+
+    private PDFView mPDFView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +44,14 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mPDFView = findViewById(R.id.pdfViewer);
+
+        bookTile = new ArrayList<>();
+
         recyclerView = findViewById(R.id.rvBooks);
-        ArrayList<DataManager> bookTile = new ArrayList<>();
+        //ArrayList<DataManager> bookTile = new ArrayList<>();
         bookTile.add(new DataManager("Bob Marley Biography", "Iuliana Cosmina"));
-        bookTile.add(new DataManager("Android Cookbook", "Ian F. Darwin"));
+        bookTile.add(new DataManager("Wealth Without Theft", "Kolawole Oyeyemi"));
         bookTile.add(new DataManager("Linux Bible", "Christopher Negus"));
         bookTile.add(new DataManager("The Richest Man In Babylon", "George S Classon"));
         bookTile.add(new DataManager("The Story of My Life", "Helen Keller"));
@@ -52,7 +70,10 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         // specify an adapter
         mAdapter = new BooksAdapter(this, bookTile, this);
         recyclerView.setAdapter(mAdapter);
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,16 +98,13 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
     //Click listener
     @Override
     public void onBookClick(View v, int position) {
-        //Toast.makeText(this, "Clicked: " + position, Toast.LENGTH_SHORT).show();
 
-        ArrayList<BooksAdapter> list = new ArrayList<>();
+        final DataManager title = bookTile.get(position);
+        String mTitlle = title.getBookTitle();
 
-        Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
-        intent.putExtra("pdfFileName", list);
+       Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
+       intent.putExtra("pdfFileName", mTitlle);
         v.getContext().startActivity(intent);
 
-//        Intent intent = new Intent(this, PdfViewerActivity.class);
-//        intent.putExtra("title", dataManager);
-//        this.startActivity(intent);
     }
 }

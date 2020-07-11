@@ -1,8 +1,6 @@
 package com.example.mobooks;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,26 +13,21 @@ import java.util.ArrayList;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> {
 
-    private ArrayList<DataManager> mDataset;
+    private ArrayList<DataManager> bookDataset;
+
     Context mContext;
     private OnBookClickListener mOnBookClickListener;
 
     public BooksAdapter(Context mContext, ArrayList<DataManager> mDataset, OnBookClickListener mOnBookClickListener) {
-        this.mDataset = mDataset;
+        this.bookDataset = mDataset;
         this.mContext = mContext;
         this.mOnBookClickListener = mOnBookClickListener;
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return bookDataset.size();
     }
-
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-//    public BooksAdapter(ArrayList<DataManager> myDataset) {
-//        mDataset = myDataset;
-//    }
 
     @NonNull
     @Override
@@ -46,8 +39,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        DataManager bookTitle = mDataset.get(position);
-        DataManager bookAuthor = mDataset.get(position);
+        DataManager bookTitle = bookDataset.get(position);
+        DataManager bookAuthor = bookDataset.get(position);
 
         holder.tvBookTitle.setText(bookTitle.getBookTitle());
         holder.tvBookAuthor.setText(bookAuthor.getBookAuthor());
