@@ -134,6 +134,13 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
             case R.id.nav_home:
                 Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.nav_business:
+                Intent bus = new Intent(this, BusinessActivity.class);
+                startActivity(bus);
+                finish();
+                Toast.makeText(this, "Business", Toast.LENGTH_SHORT).show();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

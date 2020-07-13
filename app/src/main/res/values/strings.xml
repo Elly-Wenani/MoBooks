@@ -22,4 +22,10 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_business">BusinessActivity</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="communication">Communication</string>
+    <string name="rate">Rate</string>
+    <string name="share">Share</string>
+    <string name="business">Business</string>
 </resources>

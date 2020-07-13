@@ -6,35 +6,40 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_icon"
+            android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_business"
+            android:icon="@drawable/ic_business"
+            android:title="@string/business" />
     </group>
 
-    <item android:title="Profile">
+    <item android:title="@string/profile">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_profile"
-                    android:icon="@drawable/ic_user_icon"
-                    android:title="Profile" />
+                    android:icon="@drawable/ic_user"
+                    android:title="@string/profile" />
                 <item
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_logout"
-                    android:title="Logout" />
+                    android:title="@string/logout" />
             </group>
         </menu>
     </item>
 
-    <item android:title="Communication">
+    <item android:title="@string/communication">
         <menu>
             <group android:checkableBehavior="single">
 
                 <item android:id="@+id/nav_rate"
-                    android:title="Rate"
+                    android:title="@string/rate"
                     android:icon="@drawable/ic_rate"/>
 
                 <item android:id="@+id/nav_share"
-                    android:title="Share"
+                    android:title="@string/share"
                     android:icon="@drawable/ic_share"/>
             </group>
         </menu>
