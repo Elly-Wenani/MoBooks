@@ -19,7 +19,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.ArrayList;
+
 public class BusinessActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    ArrayList<BooksMode> mDeals;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private ChildEventListener mChildEventListener;
 
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
@@ -70,9 +97,47 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                 startActivity(home);
                 finish();
                 break;
+
+            case R.id.nav_logout:
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("Logout", "User logged out");
+                                FirebaseUtil.attachListener();
+                            }
+                        });
+
+                FirebaseUtil.detachListener();
+                return true;
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FirebaseUtil.detachListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        FirebaseUtil.openFbReference("traveldeals", this);
+        //FirebaseUtil.attachListener();
+        RecyclerView rvDeals = findViewById(R.id.rvBusinessBooks);
+        final BsBooksAdapter adapter = new BsBooksAdapter();
+        rvDeals.setAdapter(adapter);
+        LinearLayoutManager dealLayoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvDeals.setLayoutManager(dealLayoutManager);
+        FirebaseUtil.attachListener();
+    }
+
+    public void showMenu() {
+        invalidateOptionsMenu();
     }
 }
