@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -44,6 +45,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
     private ArrayList<DataManager> bookTile;
 
     private AppBarConfiguration mAppBarConfiguration;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         mPDFView = findViewById(R.id.pdfViewer);
         recyclerView = findViewById(R.id.rvBooks);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -70,6 +72,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        navigationView.setCheckedItem(R.id.nav_home);
 
         //Populate recycler view
         bookTile = new ArrayList<>();
@@ -127,4 +130,12 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         v.getContext().startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
