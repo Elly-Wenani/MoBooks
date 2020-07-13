@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="activity_home"
-    >
+    tools:showIn="activity_home">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_icon"
             android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
     </group>
+
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_user_icon"
+                    android:title="Profile" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Communication">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item android:id="@+id/nav_rate"
+                    android:title="Rate"
+                    android:icon="@drawable/ic_rate"/>
+
+                <item android:id="@+id/nav_share"
+                    android:title="Share"
+                    android:icon="@drawable/ic_share"/>
+            </group>
+        </menu>
+    </item>
 </menu>
 
-<!--    tools:showIn="navigation_view"-->
+    <!--    tools:showIn="navigation_view"-->
