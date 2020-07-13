@@ -3,6 +3,7 @@ package com.example.mobooks;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -35,7 +36,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBookClickListener {
+public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBookClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
     private BooksAdapter mAdapter;
@@ -72,6 +73,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
         //Populate recycler view
@@ -137,5 +139,17 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_home:
+                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return false;
     }
 }
