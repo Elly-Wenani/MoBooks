@@ -3,8 +3,14 @@ package com.example.mobooks;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +28,7 @@ import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnRenderListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.google.android.material.navigation.NavigationView;
 
 import org.w3c.dom.Text;
 
@@ -36,6 +43,8 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
     private PDFView mPDFView;
     private ArrayList<DataManager> bookTile;
 
+    private AppBarConfiguration mAppBarConfiguration;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +56,20 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         //Hooks
         mPDFView = findViewById(R.id.pdfViewer);
         recyclerView = findViewById(R.id.rvBooks);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                .setDrawerLayout(drawer)
+                .build();
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
 
         //Populate recycler view
         bookTile = new ArrayList<>();
@@ -99,8 +122,9 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         final DataManager title = bookTile.get(position);
         String mTitlle = title.getBookTitle();
 
-       Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
-       intent.putExtra("pdfFileName", mTitlle);
+        Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
+        intent.putExtra("pdfFileName", mTitlle);
         v.getContext().startActivity(intent);
     }
+
 }
