@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".BusinessActivity"
+            android:label="@string/title_activity_business"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".NavigationActivity"
             android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PdfViewerActivity"
             android:label="@string/title_activity_pdf_viewer"
