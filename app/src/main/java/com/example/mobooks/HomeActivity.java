@@ -42,6 +42,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Most Read Books");
 
         //Hooks
         mPDFView = findViewById(R.id.pdfViewer);
@@ -50,18 +51,16 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         //Populate recycler view
         bookTile = new ArrayList<>();
 
-        bookTile.add(new DataManager("Bob Marley Biography", "Iuliana Cosmina"));
+        bookTile.add(new DataManager("How To Win Friends And Influence People", "Dale Carnegie"));
         bookTile.add(new DataManager("Wealth Without Theft", "Kolawole Oyeyemi"));
-        bookTile.add(new DataManager("Linux Bible", "Christopher Negus"));
+        bookTile.add(new DataManager("Act Like a Leader, Think Like a Leader", "Herminia Ibarra"));
         bookTile.add(new DataManager("The Richest Man In Babylon", "George S Classon"));
         bookTile.add(new DataManager("The Story of My Life", "Helen Keller"));
         bookTile.add(new DataManager("The Intelligent Investor", "Benjamin Graham"));
-        bookTile.add(new DataManager("How To Win Friends And Influence People", "Dale Carnegie"));
-        bookTile.add(new DataManager("Bob Marley A Biography", "Greenwood Biographies"));
-        bookTile.add(new DataManager("Act Like a Leader, Think Like a Leader", "Herminia Ibarra"));
         bookTile.add(new DataManager("Power Score", "Alan Foster"));
         bookTile.add(new DataManager("I kissed dating goodbye", "Joshua Harris"));
         bookTile.add(new DataManager("Money with a Mission", "Dr. Leroy Thompson Sr"));
+        bookTile.add(new DataManager("Bob Marley Biography", "Iuliana Cosmina"));
 
         // Linear layout manager
         layoutManager = new LinearLayoutManager(this);
@@ -103,6 +102,5 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
        Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
        intent.putExtra("pdfFileName", mTitlle);
         v.getContext().startActivity(intent);
-
     }
 }
