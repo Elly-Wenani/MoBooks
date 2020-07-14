@@ -137,5 +137,4 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
             }
         }
     }
-
 }

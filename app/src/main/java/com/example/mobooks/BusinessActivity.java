@@ -109,7 +109,9 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                         });
 
                 FirebaseUtil.detachListener();
-                return true;
+                //return true;
+                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -140,4 +142,5 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
     public void showMenu() {
         invalidateOptionsMenu();
     }
+
 }
