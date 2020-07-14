@@ -43,7 +43,7 @@ import java.util.ArrayList;
 
 public class BusinessActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    ArrayList<BooksMode> mDeals;
+    private ArrayList<BooksMode> mDeals;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
@@ -107,7 +107,7 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                                 FirebaseUtil.attachListener();
                             }
                         });
-
+                finish();
                 FirebaseUtil.detachListener();
                 //return true;
                 break;
@@ -128,14 +128,14 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
     protected void onResume() {
         super.onResume();
 
-        FirebaseUtil.openFbReference("traveldeals", this);
+        FirebaseUtil.openFbReference("businessBooks", this);
         //FirebaseUtil.attachListener();
-        RecyclerView rvDeals = findViewById(R.id.rvBusinessBooks);
+        RecyclerView rvBusinessBooks = findViewById(R.id.rvBusinessBooks);
         final BsBooksAdapter adapter = new BsBooksAdapter();
-        rvDeals.setAdapter(adapter);
-        LinearLayoutManager dealLayoutManager =
+        rvBusinessBooks.setAdapter(adapter);
+        LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rvDeals.setLayoutManager(dealLayoutManager);
+        rvBusinessBooks.setLayoutManager(booksLayoutManager);
         FirebaseUtil.attachListener();
     }
 

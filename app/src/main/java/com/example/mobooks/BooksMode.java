@@ -4,21 +4,19 @@ import java.io.Serializable;
 
 public class BooksMode implements Serializable {
     private String id;
-    private String title;
-    private String description;
-    //private String price;
-    private String imageUrl;
-    private String imageName;
+    private String bkTitle;
+    private String bkAuthor;
+    private String bkImageUrl;
+    private String bkImageName;
 
     public BooksMode(){}
 
-    public BooksMode(String title, String description, String imageUrl, String imageName) {
+    public BooksMode(String bkTitle, String bkAuthor, String bkImageUrl, String bkImageName) {
         this.setId(id);
-        this.setTitle(title);
-        this.setDescription(description);
-        //this.setPrice(price);
-        this.setImageUrl(imageUrl);
-        this.setImageName(imageName);
+        this.setBkTitle(bkTitle);
+        this.setBkAuthor(bkAuthor);
+        this.setBkImageUrl(bkImageUrl);
+        this.setBkImageName(bkImageName);
     }
 
     public String getId() {
@@ -29,43 +27,35 @@ public class BooksMode implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getBkTitle() {
+        return bkTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBkTitle(String bkTitle) {
+        this.bkTitle = bkTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBkAuthor() {
+        return bkAuthor;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBkAuthor(String bkAuthor) {
+        this.bkAuthor = bkAuthor;
     }
 
-//    public String getPrice() {
-//        return price;
-//    }
-//
-//    public void setPrice(String price) {
-//        this.price = price;
-//    }
-
-    public String getImageUrl() {
-        return imageUrl;
+    public String getBkImageUrl() {
+        return bkImageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setBkImageUrl(String bkImageUrl) {
+        this.bkImageUrl = bkImageUrl;
     }
 
-    public String getImageName() {
-        return imageName;
+    public String getBkImageName() {
+        return bkImageName;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
+    public void setBkImageName(String bkImageName) {
+        this.bkImageName = bkImageName;
     }
 }

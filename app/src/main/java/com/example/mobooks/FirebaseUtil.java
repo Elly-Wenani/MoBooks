@@ -58,12 +58,11 @@ public class FirebaseUtil {
                         String userId = firebaseAuth.getUid();
                         checkAdmin(userId);
                     }
-                    Toast.makeText(callerActivity.getBaseContext(), "Welcome back", Toast.LENGTH_SHORT).show();
                 }
             };
             connectStorage();
         }
-        mDeals = new ArrayList<BooksMode>();
+        mDeals = new ArrayList<>();
         mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
     }
 
@@ -74,7 +73,7 @@ public class FirebaseUtil {
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build());
 
-// Create and launch sign-in intent
+        // Create and launch sign-in intent
         caller.startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
@@ -94,7 +93,7 @@ public class FirebaseUtil {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 FirebaseUtil.isAdmin = true;
-                //Log.d("Admin: ", "You are an admin");
+                Log.d("Admin: ", "You are an admin");
                 caller.showMenu();
             }
 
@@ -129,11 +128,10 @@ public class FirebaseUtil {
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
 
-    public static void connectStorage(){
+    public static void connectStorage() {
         mStorage = FirebaseStorage.getInstance();
-        mStorageReference = mStorage.getReference().child("deals_pictures");
+        mStorageReference = mStorage.getReference().child("books");
     }
-
 
 
 }

@@ -1,7 +1,6 @@
 package com.example.mobooks;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,31 +19,29 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealViewHolder>{
 
-    ArrayList<BooksMode> mDeals;
+    ArrayList<BooksMode> onlineBooksSet;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
-    private ImageView mImageDeal;
+    private ImageView onlineBookImage;
 
     public BsBooksAdapter() {
-        //FirebaseUtil.openFbReference("traveldeals");
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
-        mDeals = FirebaseUtil.mDeals;
+        onlineBooksSet = FirebaseUtil.mDeals;
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 BooksMode td = snapshot.getValue(BooksMode.class);
-                Log.d("Deal: ", td.getTitle());
+                Log.d("Book: ", td.getBkTitle());
                 td.setId(snapshot.getKey());
-                mDeals.add(td);
-                notifyItemInserted(mDeals.size() - 1);
+                onlineBooksSet.add(td);
+                notifyItemInserted(onlineBooksSet.size() - 1);
             }
 
             @Override
@@ -81,40 +78,33 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
 
     @Override
     public void onBindViewHolder(@NonNull DealViewHolder holder, int position) {
-        BooksMode deal = mDeals.get(position);
+        BooksMode deal = onlineBooksSet.get(position);
         holder.bind(deal);
     }
 
     @Override
     public int getItemCount() {
-        return mDeals.size();
+        return onlineBooksSet.size();
     }
 
     public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTitle;
         TextView tvDescription;
-        TextView tvPrice;
 
         public DealViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-            //tvPrice = itemView.findViewById(R.id.tvPrice);
-            mImageDeal = itemView.findViewById(R.id.imageDeal);
+            onlineBookImage = itemView.findViewById(R.id.imageDeal);
             itemView.setOnClickListener(this);
         }
 
         public void bind(BooksMode deal) {
 
-            tvTitle.setText(deal.getTitle());
-            tvDescription.setText(deal.getDescription());
-            //tvPrice.setText(deal.getPrice());
-            showImage(deal.getImageUrl());
-
-//            if (deal.getPrice() == null) {
-//                tvPrice.setText("0.00");
-//            }
+            tvTitle.setText(deal.getBkTitle());
+            tvDescription.setText(deal.getBkAuthor());
+            showImage(deal.getBkImageUrl());
         }
 
         @Override
@@ -129,11 +119,11 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
 
         private void showImage(String url){
             if (url != null && url.isEmpty() == false){
-                Picasso.with(mImageDeal.getContext())
+                Picasso.with(onlineBookImage.getContext())
                         .load(url)
                         .resize(80, 80)
                         .centerCrop()
-                        .into(mImageDeal);
+                        .into(onlineBookImage);
             }
         }
     }
