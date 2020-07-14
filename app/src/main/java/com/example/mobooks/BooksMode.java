@@ -8,15 +8,17 @@ public class BooksMode implements Serializable {
     private String bkAuthor;
     private String bkImageUrl;
     private String bkImageName;
+    private String bkFileUrl; //For pdf file
 
     public BooksMode(){}
 
-    public BooksMode(String bkTitle, String bkAuthor, String bkImageUrl, String bkImageName) {
+    public BooksMode(String bkTitle, String bkAuthor, String bkImageUrl, String bkImageName, String bkFileUrl) {
         this.setId(id);
         this.setBkTitle(bkTitle);
         this.setBkAuthor(bkAuthor);
         this.setBkImageUrl(bkImageUrl);
         this.setBkImageName(bkImageName);
+        this.setBkFileUrl(bkFileUrl); //For pdf file
     }
 
     public String getId() {
@@ -57,5 +59,14 @@ public class BooksMode implements Serializable {
 
     public void setBkImageName(String bkImageName) {
         this.bkImageName = bkImageName;
+    }
+
+    //For pdf file
+    public String getBkFileUrl() {
+        return bkFileUrl;
+    }
+
+    public void setBkFileUrl(String bkFileUrl) {
+        this.bkFileUrl = bkFileUrl;
     }
 }
