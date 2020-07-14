@@ -119,7 +119,7 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
         }
 
         private void showImage(String url){
-            if (url != null && url.isEmpty() == false){
+            if (url != null && !url.isEmpty()){
                 Picasso.with(onlineBookImage.getContext())
                         .load(url)
                         .resize(80, 80)

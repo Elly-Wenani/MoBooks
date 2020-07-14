@@ -20,7 +20,7 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
         mPDFView = findViewById(R.id.onlinePdfViewer);
         TextView nothingToShow = findViewById(R.id.onlineNothingToShow);
 
-        //String getItem = getIntent().getStringExtra("pdfFileName");
+        //String getItem = getIntent().getStringExtra("Books");
     }
 
     //The back button has to be clicked twice before it exits
