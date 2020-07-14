@@ -342,7 +342,7 @@ public class PdfViewerActivity extends AppCompatActivity {
             backToast.cancel();
             return;
         } else {
-            backToast = Toast.makeText(getApplicationContext(), "Press again to exit", Toast.LENGTH_SHORT);
+            backToast = Toast.makeText(getApplicationContext(), R.string.press_again_to_exit, Toast.LENGTH_SHORT);
             backToast.show();
         }
         onBackPressTime = System.currentTimeMillis();

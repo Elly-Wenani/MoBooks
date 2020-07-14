@@ -1,6 +1,7 @@
 package com.example.mobooks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,12 +110,12 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
 
         @Override
         public void onClick(View v) {
-//            int position = getAdapterPosition();
-//            Log.d("Click: ", String.valueOf(position));
-//            BooksMode selectedDeal = mDeals.get(position);
-//            Intent intent = new Intent(v.getContext(), DealInsertActivity.class);
-//            intent.putExtra("Deal", selectedDeal);
-//            v.getContext().startActivity(intent);
+            int position = getAdapterPosition();
+            Log.d("Click: ", String.valueOf(position));
+            BooksMode selectedDeal = onlineBooksSet.get(position);
+            Intent intent = new Intent(v.getContext(), OnlinePdfViewerActivity.class);
+            intent.putExtra("Books", selectedDeal);
+            v.getContext().startActivity(intent);
         }
 
         private void showImage(String url){

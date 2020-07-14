@@ -43,7 +43,7 @@ import java.util.ArrayList;
 
 public class BusinessActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ArrayList<BooksMode> mDeals;
+    private ArrayList<BooksMode> onlineBooksSet;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
