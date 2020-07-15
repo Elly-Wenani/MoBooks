@@ -62,7 +62,6 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
         downloadPdf(onlineBooksSet.getBkFileUrl(), onlineBooksSet.getBkTitle());
     }
 
-
     //This method downloads pdf file from server db
     private void downloadPdf(final String FILE_LINK, final String fileName) {
         new AsyncTask<Void, Integer, Boolean>() {
