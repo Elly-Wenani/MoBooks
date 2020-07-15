@@ -1,8 +1,6 @@
 package com.example.mobooks;
 
-import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 public class FirebaseUtil {
 
     public static FirebaseDatabase mFirebaseDatabase;
@@ -32,7 +28,7 @@ public class FirebaseUtil {
     public static FirebaseStorage mStorage;
     public static StorageReference mStorageReference;
     public static FirebaseAuth.AuthStateListener mAuthStateListener;
-    public static ArrayList<BooksMode> mDeals;
+    public static ArrayList<BooksMode> onlineBooksSet;
     private static final int RC_SIGN_IN = 123;
     private static BusinessActivity caller;
 
@@ -62,7 +58,7 @@ public class FirebaseUtil {
             };
             connectStorage();
         }
-        mDeals = new ArrayList<>();
+        onlineBooksSet = new ArrayList<>();
         mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
     }
 

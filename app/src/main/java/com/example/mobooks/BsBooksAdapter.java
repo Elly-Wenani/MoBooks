@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,12 +30,13 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
     private ImageView onlineBookImage;
+    private PDFView onlineMPDFView;
 
     public BsBooksAdapter() {
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
-        onlineBooksSet = FirebaseUtil.mDeals;
+        onlineBooksSet = FirebaseUtil.onlineBooksSet;
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -79,8 +81,8 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
 
     @Override
     public void onBindViewHolder(@NonNull DealViewHolder holder, int position) {
-        BooksMode deal = onlineBooksSet.get(position);
-        holder.bind(deal);
+        BooksMode booksMode = onlineBooksSet.get(position);
+        holder.bind(booksMode);
     }
 
     @Override
@@ -102,12 +104,12 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
         }
 
         public void bind(BooksMode deal) {
-
             tvTitle.setText(deal.getBkTitle());
             tvDescription.setText(deal.getBkAuthor());
             showImage(deal.getBkImageUrl());
         }
 
+        //Pass intent to OnlinePdfViewer Activity
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
@@ -118,6 +120,7 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
             v.getContext().startActivity(intent);
         }
 
+        //Load image on recycler view
         private void showImage(String url){
             if (url != null && !url.isEmpty()){
                 Picasso.with(onlineBookImage.getContext())
