@@ -1,18 +1,17 @@
 package com.example.mobooks;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import android.content.Intent;
-import android.content.res.Resources;
 
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
@@ -20,10 +19,8 @@ import com.github.barteksc.pdfviewer.listener.OnRenderListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 import com.github.barteksc.pdfviewer.PDFView;
-import com.squareup.picasso.Target;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -139,6 +136,10 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
         try {
             final File file = getFileStreamPath(fileName);
 
+//            Log.e("file: ", "file: " + file.getAbsolutePath());
+//            seekBar.setVisibility(View.GONE);
+//            textPleaseWait.setVisibility(View.GONE);
+//            onlinePdfView.setVisibility(View.VISIBLE);
             mPDFView.fromFile(file)
                     .defaultPage(0)
                     .enableAnnotationRendering(true)
@@ -156,6 +157,12 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
                     .onError(new OnErrorListener() {
                         @Override
                         public void onError(Throwable t) {
+
+                            alertMessage();
+                            //This condition deletes any file that did not finish loading
+                            if (file.exists()){
+                                file.delete();
+                            }
                             Toast.makeText(OnlinePdfViewerActivity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -172,43 +179,20 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-    //Display passed book from Firebase to OnlinePdfViewerActivity
-//    private void showBook(String url) {
-//        if (url != null && !url.isEmpty()) {
-//            mPDFView.fromUri(Uri.parse(url))
-//                    .defaultPage(0)
-//                    .enableAnnotationRendering(true)
-//                    .scrollHandle(new DefaultScrollHandle(this))
-//                    .spacing(0)
-//                    .enableSwipe(true)
-//                    .swipeHorizontal(false)
-//                    .enableAntialiasing(true)
-//                    .onPageError(new OnPageErrorListener() {
-//                        @Override
-//                        public void onPageError(int page, Throwable t) {
-//                            Toast.makeText(getApplicationContext(), "Page error!", Toast.LENGTH_SHORT).show();
-//                        }
-//                    })
-//                    .onError(new OnErrorListener() {
-//                        @Override
-//                        public void onError(Throwable t) {
-//                            Toast.makeText(OnlinePdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
-//                        }
-//                    })
-//                    .onRender(new OnRenderListener() {
-//                        @Override
-//                        public void onInitiallyRendered(int nbPages, float pageWidth, float pageHeight) {
-//                            mPDFView.fitToWidth();
-//                        }
-//                    })
-//                    .load();
-//        }
-//    }
+    //This method alerts the user to re-load the file again if it failed loading
+    private void alertMessage(){
+        new AlertDialog.Builder(this)
+                .setMessage("The previous download was interrupted. Kindly " +
+                        "press cancel and open this book again to re-load!\n" +
+                        "Note: Do not interrupt loading process")
+                .setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        OnlinePdfViewerActivity.this.finish();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
     //The back button has to be clicked twice before it exits
     private long onBackPressTime;
