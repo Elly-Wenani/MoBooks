@@ -6,8 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +40,11 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
-    //private static final int PICTURE_RESULT = 42; //The answer to everything
     BooksMode onlineBooksSet;
-    //ImageView mImageView;
+
+    private SeekBar mSeekBar;
+    private TextView mLoading;
+    private TextView tvSeekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +52,8 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_online_pdfviewer);
 
         mPDFView = findViewById(R.id.onlinePdfViewer);
-        TextView nothingToShow = findViewById(R.id.onlineNothingToShow);
-
-        //String getItem = getIntent().getStringExtra("Books");
+        mLoading = findViewById(R.id.tvLoading);
+        tvSeekBar = findViewById(R.id.tvSeekBar);
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
@@ -59,11 +65,12 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
             onlineBooksSet = new BooksMode();
         }
         this.onlineBooksSet = onlineBooksSet;
-        downloadPdf(onlineBooksSet.getBkFileUrl(), onlineBooksSet.getBkTitle());
+        initSeekBar();
+        downloadPdfFile(onlineBooksSet.getBkFileUrl(), onlineBooksSet.getBkTitle());
     }
 
     //This method downloads pdf file from server db
-    private void downloadPdf(final String FILE_LINK, final String fileName) {
+    private void downloadPdfFile(final String FILE_LINK, final String fileName) {
         new AsyncTask<Void, Integer, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
@@ -115,14 +122,14 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
             @Override
             protected void onProgressUpdate(Integer... values) {
                 super.onProgressUpdate(values);
-                //seekBar.setProgress(values[0]);
+                mSeekBar.setProgress(values[0]);
             }
 
             @Override
             protected void onPostExecute(Boolean aBoolean) {
                 super.onPostExecute(aBoolean);
                 if (aBoolean) {
-                    openPdf(fileName);
+                    openPdfFile(fileName);
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable to download file", Toast.LENGTH_SHORT).show();
                 }
@@ -131,14 +138,14 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
     }
 
     //This method opens the downloaded pdf file from internal storage
-    private void openPdf(String fileName) {
+    private void openPdfFile(String fileName) {
         try {
             final File file = getFileStreamPath(fileName);
-
-//            Log.e("file: ", "file: " + file.getAbsolutePath());
-//            seekBar.setVisibility(View.GONE);
-//            textPleaseWait.setVisibility(View.GONE);
-//            onlinePdfView.setVisibility(View.VISIBLE);
+            Log.e("File ", "file: " + file.getAbsolutePath());
+            mSeekBar.setVisibility(View.GONE);
+            mLoading.setVisibility(View.GONE);
+            tvSeekBar.setVisibility(View.GONE);
+            mPDFView.setVisibility(View.VISIBLE);
             mPDFView.fromFile(file)
                     .defaultPage(0)
                     .enableAnnotationRendering(true)
@@ -159,10 +166,9 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
 
                             alertMessage();
                             //This condition deletes any file that did not finish loading
-                            if (file.exists()){
+                            if (file.exists()) {
                                 file.delete();
                             }
-                            Toast.makeText(OnlinePdfViewerActivity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .onRender(new OnRenderListener() {
@@ -179,7 +185,7 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
     }
 
     //This method alerts the user to re-load the file again if it failed loading
-    private void alertMessage(){
+    private void alertMessage() {
         new AlertDialog.Builder(this)
                 .setMessage("The previous download was interrupted. Kindly " +
                         "press cancel and open this book again to re-load!\n" +
@@ -191,6 +197,31 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    private void initSeekBar() {
+        mSeekBar = findViewById(R.id.seekBar);
+        mSeekBar.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+        mSeekBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int val = (progress * (seekBar.getWidth()) - 4
+                        * seekBar.getThumbOffset()) / seekBar.getMax();
+                tvSeekBar.setText("" + progress);
+                tvSeekBar.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     //The back button has to be clicked twice before it exits
@@ -210,3 +241,5 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
         onBackPressTime = System.currentTimeMillis();
     }
 }
+
+//A9B7C6
