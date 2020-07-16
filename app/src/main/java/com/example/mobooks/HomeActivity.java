@@ -13,12 +13,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -128,6 +132,19 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
                 finish();
                 break;
 
+            case R.id.nav_logout:
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("Logout", "User logged out");
+                                FirebaseUtil.attachListener();
+                            }
+                        });
+                FirebaseUtil.detachListener();
+                //return true;
+                break;
+
             case R.id.nav_insert:
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
@@ -136,5 +153,22 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
 
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FirebaseUtil.detachListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUtil.openFbReference("businessBooks", this);
+        FirebaseUtil.attachListener();
+    }
+
+    public void showMenu() {
+        invalidateOptionsMenu();
     }
 }

@@ -30,14 +30,14 @@ public class FirebaseUtil {
     public static FirebaseAuth.AuthStateListener mAuthStateListener;
     public static ArrayList<BooksMode> onlineBooksSet;
     private static final int RC_SIGN_IN = 123;
-    private static BusinessActivity caller;
+    private static HomeActivity caller;
 
     private FirebaseUtil() {
     }
 
     public static boolean isAdmin;
 
-    public static void openFbReference(String ref, final BusinessActivity callerActivity) {
+    public static void openFbReference(String ref, final HomeActivity callerActivity) {
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
