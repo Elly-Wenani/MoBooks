@@ -30,4 +30,12 @@
     <string name="business">Business</string>
     <string name="press_again_to_exit">Press again to exit</string>
     <string name="loading">Loading...</string>
+    <string name="book_upload">Book Upload</string>
+    <string name="book_title">Book Title</string>
+    <string name="book_author">Book Author</string>
+    <string name="image_url">Image Url</string>
+    <string name="book_url">Book Url</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="insert_book">Insert</string>
 </resources>

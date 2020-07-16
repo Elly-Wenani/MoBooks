@@ -86,36 +86,15 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         recyclerView.setAdapter(mAdapter);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     //Click listener
     @Override
     public void onBookClick(View v, int position) {
 
         final DataManager title = bookTile.get(position);
-        String mTitlle = title.getBookTitle();
+        String mTitle = title.getBookTitle();
 
         Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
-        intent.putExtra("pdfFileName", mTitlle);
+        intent.putExtra("pdfFileName", mTitle);
         v.getContext().startActivity(intent);
     }
 
@@ -138,6 +117,11 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
                 Intent bus = new Intent(this, BusinessActivity.class);
                 startActivity(bus);
                 finish();
+                break;
+
+            case R.id.nav_insert:
+                Intent insert = new Intent(this, BookInsertActivity.class);
+                startActivity(insert);
                 break;
         }
 
