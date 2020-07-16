@@ -14,7 +14,7 @@ public class BookInsertActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_insert);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Insert");
+        getSupportActionBar().setTitle("MoBooks");
     }
 
     @Override

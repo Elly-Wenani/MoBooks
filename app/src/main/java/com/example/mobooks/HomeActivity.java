@@ -63,6 +63,14 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
+        //Show items if admin and hide if not admin
+        Menu menu = navigationView.getMenu();
+        if (FirebaseUtil.isAdmin) {
+            menu.findItem(R.id.nav_insert).setVisible(true);
+        } else {
+            menu.findItem(R.id.nav_insert).setVisible(false);
+        }
+
         //Populate recycler view
         bookTile = new ArrayList<>();
 
@@ -109,7 +117,8 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+
+        switch (item.getItemId()) {
             case R.id.nav_home:
                 break;
 

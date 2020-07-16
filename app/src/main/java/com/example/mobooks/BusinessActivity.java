@@ -74,6 +74,14 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_business);
+
+        //Show items if admin and hide if not admin
+        Menu menu = navigationView.getMenu();
+        if (FirebaseUtil.isAdmin) {
+            menu.findItem(R.id.nav_insert).setVisible(true);
+        } else {
+            menu.findItem(R.id.nav_insert).setVisible(false);
+        }
     }
 
     @Override
@@ -98,6 +106,10 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                 finish();
                 break;
 
+            case R.id.nav_insert:
+                Intent insert = new Intent(this, BookInsertActivity.class);
+                startActivity(insert);
+
             case R.id.nav_logout:
                 AuthUI.getInstance()
                         .signOut(this)
@@ -107,7 +119,6 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                                 FirebaseUtil.attachListener();
                             }
                         });
-                finish();
                 FirebaseUtil.detachListener();
                 //return true;
                 break;
