@@ -66,7 +66,6 @@ public class BookInsertActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_save:
                 saveBook();
-                Toast.makeText(this, "Book Saved", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.action_delete:
@@ -76,16 +75,39 @@ public class BookInsertActivity extends AppCompatActivity {
     }
 
     private void saveBook() {
-        onlineBooksSet.setBkTitle(insertBookTitle.getText().toString().trim());
-        onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());
-        onlineBooksSet.setBkImageUrl(insertImageUrl.getText().toString().trim());
-        onlineBooksSet.setBkFileUrl(insertBookUrl.getText().toString().trim());
 
-        //Updates the values
-        if (onlineBooksSet.getId() == null) {
-            mDatabaseReference.push().setValue(onlineBooksSet);
+        String title = insertBookTitle.getText().toString();
+        String author = insertAuthor.getText().toString();
+        String imageUrl = insertImageUrl.getText().toString();
+        String bookUrl = insertBookUrl.getText().toString();
+
+        if (title.isEmpty() && author.isEmpty() && imageUrl.isEmpty() && bookUrl.isEmpty()) {
+            Toast.makeText(this, "Fields cant be empty", Toast.LENGTH_SHORT).show();
+        } else if (title.isEmpty()) {
+            insertBookTitle.setError("Enter Book Title");
+            insertBookTitle.requestFocus();
+        } else if (author.isEmpty()) {
+            insertAuthor.setError("Enter Book Author");
+            insertAuthor.requestFocus();
+        } else if (imageUrl.isEmpty()) {
+            insertImageUrl.setError("Enter Image Url");
+            insertImageUrl.requestFocus();
+        } else if (bookUrl.isEmpty()) {
+            insertBookUrl.setError("Enter Book Url");
+            insertBookUrl.requestFocus();
         } else {
-            mDatabaseReference.child(onlineBooksSet.getId()).setValue(onlineBooksSet);
+            onlineBooksSet.setBkTitle(insertBookTitle.getText().toString().trim());
+            onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());
+            onlineBooksSet.setBkImageUrl(insertImageUrl.getText().toString().trim());
+            onlineBooksSet.setBkFileUrl(insertBookUrl.getText().toString().trim());
+            Toast.makeText(this, "Book Saved", Toast.LENGTH_SHORT).show();
+
+            //Updates the values
+            if (onlineBooksSet.getId() == null) {
+                mDatabaseReference.push().setValue(onlineBooksSet);
+            } else {
+                mDatabaseReference.child(onlineBooksSet.getId()).setValue(onlineBooksSet);
+            }
         }
     }
 }
