@@ -1,7 +1,11 @@
 package com.example.mobooks;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,13 +32,17 @@ import java.util.ArrayList;
 
 public class BusinessActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ArrayList<BooksMode> onlineBooksSet;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabaseReference;
-    private ChildEventListener mChildEventListener;
+//    private ArrayList<BooksMode> onlineBooksSet;
+//    private FirebaseDatabase mFirebaseDatabase;
+//    private DatabaseReference mDatabaseReference;
+//    private ChildEventListener mChildEventListener;
 
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
+
+//    ProgressDialog mProgressDialog;
+//    CountDownTimer mCountDownTimer;
+//    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,14 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Business Books");
+
+//        //Fore progress dialog timing
+//        mProgressDialog = new ProgressDialog(this);
+//        mProgressDialog.setMessage("Loading...");
+//        mProgressDialog.setCancelable(false);
+//        mProgressDialog.setProgress(i);
+//        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -67,6 +83,20 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         } else {
             menu.findItem(R.id.nav_insert).setVisible(false);
         }
+
+//        //Progress dialog timing
+//        mProgressDialog.show();
+//        mCountDownTimer = new CountDownTimer(2000, 1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                mProgressDialog.setMessage("Loading...");
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                mProgressDialog.dismiss();
+//            }
+//        }.start();
     }
 
     @Override
@@ -140,6 +170,7 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         rvBusinessBooks.setLayoutManager(booksLayoutManager);
         //FirebaseUtil.attachListener();
     }
+
 
     public void showMenu() {
         invalidateOptionsMenu();
