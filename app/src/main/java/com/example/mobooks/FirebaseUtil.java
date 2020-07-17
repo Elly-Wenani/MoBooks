@@ -31,12 +31,14 @@ public class FirebaseUtil {
     public static ArrayList<BooksMode> onlineBooksSet;
     private static final int RC_SIGN_IN = 123;
     private static HomeActivity caller;
+    private static BiographyActivity callerBio;
 
     private FirebaseUtil() {
     }
 
     public static boolean isAdmin;
 
+    //This method populates BusinessActivity with business books from firebase database
     public static void openFbReference(String ref, final HomeActivity callerActivity) {
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
@@ -44,6 +46,32 @@ public class FirebaseUtil {
 
             mFirebaseAuth = FirebaseAuth.getInstance();
             caller = callerActivity;
+
+            mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    if (firebaseAuth.getCurrentUser() == null) {
+                        FirebaseUtil.singIn();
+                    } else {
+                        String userId = firebaseAuth.getUid();
+                        checkAdmin(userId);
+                    }
+                }
+            };
+            connectStorage();
+        }
+        onlineBooksSet = new ArrayList<>();
+        mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
+    }
+
+    //Method populates BiographyActivity with biography books from firebase database
+    public static void openFbReferenceBio(String ref, final BiographyActivity callerActivityBio) {
+        if (mFirebaseUtil == null) {
+            mFirebaseUtil = new FirebaseUtil();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+            mFirebaseAuth = FirebaseAuth.getInstance();
+            callerBio = callerActivityBio;
 
             mAuthStateListener = new FirebaseAuth.AuthStateListener() {
                 @Override
@@ -127,6 +155,4 @@ public class FirebaseUtil {
         mStorage = FirebaseStorage.getInstance();
         mStorageReference = mStorage.getReference().child("books");
     }
-
-
 }

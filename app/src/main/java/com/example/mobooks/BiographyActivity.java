@@ -130,14 +130,14 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
     protected void onResume() {
         super.onResume();
 
-        //FirebaseUtil.openFbReference("businessBooks", this);
-        //FirebaseUtil.attachListener();
+        FirebaseUtil.openFbReferenceBio("biographyBooks", this);
+        FirebaseUtil.attachListener();
         RecyclerView rvBiographyBooks = findViewById(R.id.rvBiographyBooks);
         final BiographyAdapter adapter = new BiographyAdapter();
         rvBiographyBooks.setAdapter(adapter);
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvBiographyBooks.setLayoutManager(booksLayoutManager);
-        FirebaseUtil.attachListener();
+        //FirebaseUtil.attachListener();
     }
 }
