@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealViewHolder>{
+public class BiographyAdapter extends RecyclerView.Adapter<BiographyAdapter.BioViewHolder>{
 
     ArrayList<BooksMode> onlineBooksSet;
     private FirebaseDatabase mFirebaseDatabase;
@@ -32,7 +32,7 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
     private ImageView onlineBookImage;
     private PDFView onlineMPDFView;
 
-    public BsBooksAdapter() {
+    public BiographyAdapter() {
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
@@ -41,7 +41,7 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 BooksMode td = snapshot.getValue(BooksMode.class);
-                Log.d("Business Book: ", td.getBkTitle());
+                Log.d("Biography Book: ", td.getBkTitle());
                 td.setId(snapshot.getKey());
                 onlineBooksSet.add(td);
                 notifyItemInserted(onlineBooksSet.size() - 1);
@@ -72,15 +72,15 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
 
     @NonNull
     @Override
-    public DealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.books_row, parent, false);
-        return new DealViewHolder(itemView);
+        return new BioViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DealViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BiographyAdapter.BioViewHolder holder, int position) {
         BooksMode booksMode = onlineBooksSet.get(position);
         holder.bind(booksMode);
     }
@@ -90,12 +90,12 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
         return onlineBooksSet.size();
     }
 
-    public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class BioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTitle;
         TextView tvAuthor;
 
-        public DealViewHolder(@NonNull View itemView) {
+        public BioViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.idTvTitle);
             tvAuthor = itemView.findViewById(R.id.idTvAuthor);
