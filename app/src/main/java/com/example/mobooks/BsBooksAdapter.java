@@ -75,7 +75,7 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
     public DealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.business_books_row, parent, false);
+                .inflate(R.layout.books_row, parent, false);
         return new DealViewHolder(itemView);
     }
 
@@ -93,19 +93,19 @@ public class BsBooksAdapter extends RecyclerView.Adapter<BsBooksAdapter.DealView
     public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTitle;
-        TextView tvDescription;
+        TextView tvAuthor;
 
         public DealViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-            onlineBookImage = itemView.findViewById(R.id.imageDeal);
+            tvTitle = itemView.findViewById(R.id.idTvTitle);
+            tvAuthor = itemView.findViewById(R.id.idTvAuthor);
+            onlineBookImage = itemView.findViewById(R.id.idBookImage);
             itemView.setOnClickListener(this);
         }
 
         public void bind(BooksMode deal) {
             tvTitle.setText(deal.getBkTitle());
-            tvDescription.setText(deal.getBkAuthor());
+            tvAuthor.setText(deal.getBkAuthor());
             showImage(deal.getBkImageUrl());
         }
 
