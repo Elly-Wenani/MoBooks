@@ -18,8 +18,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> 
     Context mContext;
     private OnBookClickListener mOnBookClickListener;
 
-    public BooksAdapter(Context mContext, ArrayList<DataManager> mDataset, OnBookClickListener mOnBookClickListener) {
-        this.bookDataset = mDataset;
+    public BooksAdapter(Context mContext, ArrayList<DataManager> mLocalDataSet, OnBookClickListener mOnBookClickListener) {
+        this.bookDataset = mLocalDataSet;
         this.mContext = mContext;
         this.mOnBookClickListener = mOnBookClickListener;
     }

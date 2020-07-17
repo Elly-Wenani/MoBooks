@@ -10,6 +10,11 @@
             android:title="@string/menu_home" />
 
         <item
+            android:id="@+id/nav_biography"
+            android:icon="@drawable/ic_biography"
+            android:title="@string/biography" />
+
+        <item
             android:id="@+id/nav_business"
             android:icon="@drawable/ic_business"
             android:title="@string/business" />

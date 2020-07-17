@@ -239,7 +239,6 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
             backToast.show();
         }
         onBackPressTime = System.currentTimeMillis();
-        finish();
     }
 }
 

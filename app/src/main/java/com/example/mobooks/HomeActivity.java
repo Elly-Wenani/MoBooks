@@ -2,6 +2,10 @@ package com.example.mobooks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,12 +16,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -129,6 +127,12 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
             case R.id.nav_business:
                 Intent bus = new Intent(this, BusinessActivity.class);
                 startActivity(bus);
+                finish();
+                break;
+
+            case R.id.nav_biography:
+                Intent bio = new Intent(this, BiographyActivity.class);
+                startActivity(bio);
                 finish();
                 break;
 
