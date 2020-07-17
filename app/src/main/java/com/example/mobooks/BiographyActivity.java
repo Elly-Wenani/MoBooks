@@ -140,4 +140,8 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
         rvBiographyBooks.setLayoutManager(booksLayoutManager);
         //FirebaseUtil.attachListener();
     }
+
+    public void showMenu() {
+        invalidateOptionsMenu();
+    }
 }

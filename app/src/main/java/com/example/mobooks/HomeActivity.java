@@ -168,7 +168,7 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
     @Override
     protected void onResume() {
         super.onResume();
-        FirebaseUtil.openFbReference("businessBooks", this);
+        FirebaseUtil.openFbReferenceHome("homeBooks", this);
         FirebaseUtil.attachListener();
     }
 

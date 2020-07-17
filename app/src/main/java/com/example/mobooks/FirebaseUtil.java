@@ -30,7 +30,8 @@ public class FirebaseUtil {
     public static FirebaseAuth.AuthStateListener mAuthStateListener;
     public static ArrayList<BooksMode> onlineBooksSet;
     private static final int RC_SIGN_IN = 123;
-    private static HomeActivity caller;
+    private static HomeActivity callerCheck;
+    private static BusinessActivity callerBus;
     private static BiographyActivity callerBio;
 
     private FirebaseUtil() {
@@ -38,14 +39,40 @@ public class FirebaseUtil {
 
     public static boolean isAdmin;
 
-    //This method populates BusinessActivity with business books from firebase database
-    public static void openFbReference(String ref, final HomeActivity callerActivity) {
+    //Home openRef Method
+    public static void openFbReferenceHome(String ref, final HomeActivity callerActivityHom) {
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
 
             mFirebaseAuth = FirebaseAuth.getInstance();
-            caller = callerActivity;
+            callerCheck = callerActivityHom;
+
+            mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    if (firebaseAuth.getCurrentUser() == null) {
+                        FirebaseUtil.singIn();
+                    } else {
+                        String userId = firebaseAuth.getUid();
+                        checkAdmin(userId);
+                    }
+                }
+            };
+            connectStorage();
+        }
+        onlineBooksSet = new ArrayList<>();
+        mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
+    }
+
+    //This method populates BusinessActivity with business books from firebase database
+    public static void openFbReferenceBus(String ref, final BusinessActivity callerActivityBus) {
+        if (mFirebaseUtil == null) {
+            mFirebaseUtil = new FirebaseUtil();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+            mFirebaseAuth = FirebaseAuth.getInstance();
+            callerBus = callerActivityBus;
 
             mAuthStateListener = new FirebaseAuth.AuthStateListener() {
                 @Override
@@ -97,7 +124,7 @@ public class FirebaseUtil {
                 new AuthUI.IdpConfig.PhoneBuilder().build());
 
         // Create and launch sign-in intent
-        caller.startActivityForResult(
+        callerCheck.startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
@@ -117,7 +144,9 @@ public class FirebaseUtil {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 FirebaseUtil.isAdmin = true;
                 Log.d("Admin: ", "You are an admin");
-                caller.showMenu();
+                callerCheck.showMenu();
+                //callerBus.showMenu();
+                //callerBio.showMenu();
             }
 
             @Override

@@ -130,7 +130,7 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
     protected void onResume() {
         super.onResume();
 
-        //FirebaseUtil.openFbReference("biographyBooks", this);
+        FirebaseUtil.openFbReferenceBus("businessBooks", this);
         FirebaseUtil.attachListener();
         RecyclerView rvBusinessBooks = findViewById(R.id.rvBusinessBooks);
         final BsBooksAdapter adapter = new BsBooksAdapter();
@@ -139,5 +139,9 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvBusinessBooks.setLayoutManager(booksLayoutManager);
         //FirebaseUtil.attachListener();
+    }
+
+    public void showMenu() {
+        invalidateOptionsMenu();
     }
 }
