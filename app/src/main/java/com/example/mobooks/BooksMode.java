@@ -8,7 +8,7 @@ public class BooksMode implements Serializable {
     private String bkAuthor;
     private String bkImageUrl;
     private String bkImageName;
-    private String bkFileUrl; //For pdf file
+    private String bkFileUrl;
 
     public BooksMode(){}
 
@@ -18,7 +18,7 @@ public class BooksMode implements Serializable {
         this.setBkAuthor(bkAuthor);
         this.setBkImageUrl(bkImageUrl);
         this.setBkImageName(bkImageName);
-        this.setBkFileUrl(bkFileUrl); //For pdf file
+        this.setBkFileUrl(bkFileUrl);
     }
 
     public String getId() {
@@ -61,7 +61,6 @@ public class BooksMode implements Serializable {
         this.bkImageName = bkImageName;
     }
 
-    //For pdf file
     public String getBkFileUrl() {
         return bkFileUrl;
     }

@@ -1,14 +1,17 @@
 package com.example.mobooks;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -21,11 +24,11 @@ public class BookInsertActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
-    EditText insertBookTitle;
-    EditText insertAuthor;
-    EditText insertImageUrl;
-    EditText insertBookUrl;
-    BooksMode onlineBooksSet;
+    private EditText insertBookTitle;
+    private EditText insertAuthor;
+    private EditText insertImageUrl;
+    private EditText insertBookUrl;
+    private BooksMode onlineBooksSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,52 @@ public class BookInsertActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                saveBook();
+
+                String title = insertBookTitle.getText().toString();
+                String author = insertAuthor.getText().toString();
+                String imageUrl = insertImageUrl.getText().toString();
+                String bookUrl = insertBookUrl.getText().toString();
+
+                if (title.isEmpty() && author.isEmpty() && imageUrl.isEmpty() && bookUrl.isEmpty()) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("MoBooks")
+                            .setMessage("Fields cant be empty")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(getApplicationContext(), "Enter book details", Toast.LENGTH_SHORT).show();
+                                }
+                            }).show();
+                } else if (title.isEmpty()) {
+                    insertBookTitle.setError("Enter Book Title");
+                    insertBookTitle.requestFocus();
+                } else if (author.isEmpty()) {
+                    insertAuthor.setError("Enter Book Author");
+                    insertAuthor.requestFocus();
+                } else if (imageUrl.isEmpty()) {
+                    insertImageUrl.setError("Enter Image Url");
+                    insertImageUrl.requestFocus();
+                } else if (bookUrl.isEmpty()) {
+                    insertBookUrl.setError("Enter Book Url");
+                    insertBookUrl.requestFocus();
+                } else {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Save Book")
+                            .setMessage("Are you sure you want to save this book?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //If the admin clicks yes the books will be uploaded to the database
+                                    saveBook();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Nothing happens when no is clicked
+                                }
+                            }).show();
+                }
                 break;
 
             case R.id.action_delete:
@@ -74,40 +122,27 @@ public class BookInsertActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void clearText() {
+        insertBookTitle.setText("");
+        insertAuthor.setText("");
+        insertImageUrl.setText("");
+        insertBookUrl.setText("");
+    }
+
     private void saveBook() {
 
-        String title = insertBookTitle.getText().toString();
-        String author = insertAuthor.getText().toString();
-        String imageUrl = insertImageUrl.getText().toString();
-        String bookUrl = insertBookUrl.getText().toString();
+        onlineBooksSet.setBkTitle(insertBookTitle.getText().toString().trim());
+        onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());
+        onlineBooksSet.setBkImageUrl(insertImageUrl.getText().toString().trim());
+        onlineBooksSet.setBkFileUrl(insertBookUrl.getText().toString().trim());
+        Toast.makeText(this, "Book Saved", Toast.LENGTH_SHORT).show();
 
-        if (title.isEmpty() && author.isEmpty() && imageUrl.isEmpty() && bookUrl.isEmpty()) {
-            Toast.makeText(this, "Fields cant be empty", Toast.LENGTH_SHORT).show();
-        } else if (title.isEmpty()) {
-            insertBookTitle.setError("Enter Book Title");
-            insertBookTitle.requestFocus();
-        } else if (author.isEmpty()) {
-            insertAuthor.setError("Enter Book Author");
-            insertAuthor.requestFocus();
-        } else if (imageUrl.isEmpty()) {
-            insertImageUrl.setError("Enter Image Url");
-            insertImageUrl.requestFocus();
-        } else if (bookUrl.isEmpty()) {
-            insertBookUrl.setError("Enter Book Url");
-            insertBookUrl.requestFocus();
+        //Updates the values
+        if (onlineBooksSet.getId() == null) {
+            mDatabaseReference.push().setValue(onlineBooksSet);
         } else {
-            onlineBooksSet.setBkTitle(insertBookTitle.getText().toString().trim());
-            onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());
-            onlineBooksSet.setBkImageUrl(insertImageUrl.getText().toString().trim());
-            onlineBooksSet.setBkFileUrl(insertBookUrl.getText().toString().trim());
-            Toast.makeText(this, "Book Saved", Toast.LENGTH_SHORT).show();
-
-            //Updates the values
-            if (onlineBooksSet.getId() == null) {
-                mDatabaseReference.push().setValue(onlineBooksSet);
-            } else {
-                mDatabaseReference.child(onlineBooksSet.getId()).setValue(onlineBooksSet);
-            }
+            mDatabaseReference.child(onlineBooksSet.getId()).setValue(onlineBooksSet);
         }
+        clearText();
     }
 }

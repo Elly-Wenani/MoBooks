@@ -28,11 +28,6 @@ import java.util.ArrayList;
 
 public class BiographyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-//    private ArrayList<BooksMode> onlineBooksSet;
-//    private FirebaseDatabase mFirebaseDatabase;
-//    private DatabaseReference mDatabaseReference;
-//    private ChildEventListener mChildEventListener;
-
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
 

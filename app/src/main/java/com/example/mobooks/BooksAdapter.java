@@ -13,20 +13,20 @@ import java.util.ArrayList;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> {
 
-    private ArrayList<DataManager> bookDataset;
+    private ArrayList<DataManager> bookDataSet;
 
     Context mContext;
     private OnBookClickListener mOnBookClickListener;
 
     public BooksAdapter(Context mContext, ArrayList<DataManager> mLocalDataSet, OnBookClickListener mOnBookClickListener) {
-        this.bookDataset = mLocalDataSet;
+        this.bookDataSet = mLocalDataSet;
         this.mContext = mContext;
         this.mOnBookClickListener = mOnBookClickListener;
     }
 
     @Override
     public int getItemCount() {
-        return bookDataset.size();
+        return bookDataSet.size();
     }
 
     @NonNull
@@ -39,8 +39,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        DataManager bookTitle = bookDataset.get(position);
-        DataManager bookAuthor = bookDataset.get(position);
+        DataManager bookTitle = bookDataSet.get(position);
+        DataManager bookAuthor = bookDataSet.get(position);
 
         holder.tvBookTitle.setText(bookTitle.getBookTitle());
         holder.tvBookAuthor.setText(bookAuthor.getBookAuthor());
