@@ -18,6 +18,26 @@
             android:id="@+id/nav_business"
             android:icon="@drawable/ic_business"
             android:title="@string/business" />
+
+        <item
+            android:id="@+id/nav_compTech"
+            android:icon="@drawable/ic_comptech"
+            android:title="@string/computer_and_tech" />
+
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/ic_history"
+            android:title="@string/history" />
+
+        <item
+            android:id="@+id/nav_leadership"
+            android:icon="@drawable/ic_leadership"
+            android:title="@string/leadership" />
+
+        <item
+            android:id="@+id/nav_novels"
+            android:icon="@drawable/ic_novels"
+            android:title="@string/novels" />
     </group>
 
     <item android:title="@string/profile">
@@ -31,11 +51,16 @@
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_logout"
                     android:title="@string/logout" />
+
+                <item android:id="@+id/nav_insert"
+                    android:title="@string/insert_book"
+                    android:icon="@drawable/ic_add"/>
+
             </group>
         </menu>
     </item>
 
-    <item android:title="@string/communication">
+    <item android:title="@string/services">
         <menu>
             <group android:checkableBehavior="single">
 
@@ -47,12 +72,14 @@
                     android:title="@string/share"
                     android:icon="@drawable/ic_share"/>
 
-                <item android:id="@+id/nav_insert"
-                    android:title="@string/insert_book"
-                    android:icon="@drawable/ic_add"/>
+                <item android:id="@+id/nav_email"
+                    android:title="@string/send_us_email"
+                    android:icon="@drawable/ic_email"/>
+
+                <item android:id="@+id/nav_about"
+                    android:title="@string/about_us"
+                    android:icon="@drawable/ic_about"/>
             </group>
         </menu>
     </item>
 </menu>
-
-    <!--    tools:showIn="navigation_view"-->

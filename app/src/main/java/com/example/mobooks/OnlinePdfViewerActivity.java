@@ -188,7 +188,7 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
     private void alertMessage() {
         new AlertDialog.Builder(this)
                 .setMessage("The previous download was interrupted. Kindly " +
-                        "press cancel and open this book again to re-load!\n" +
+                        "re-open this book again to load!\n" +
                         "Note: Do not interrupt loading process")
                 .setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

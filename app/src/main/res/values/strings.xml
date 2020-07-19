@@ -24,12 +24,12 @@
     <string name="title_activity_business">BusinessActivity</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
-    <string name="communication">Communication</string>
+    <string name="services">Services</string>
     <string name="rate">Rate</string>
     <string name="share">Share</string>
     <string name="business">Business</string>
     <string name="press_again_to_exit">Press again to exit</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="book_upload">Book Upload</string>
     <string name="book_title">Book Title</string>
     <string name="book_author">Book Author</string>
@@ -38,5 +38,12 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="insert_book">Insert</string>
-    <string name="biography">Biography</string>
+    <string name="biography">Biography/Autobiography</string>
+    <string name="books_categories">Book Categories</string>
+    <string name="leadership">Leadership</string>
+    <string name="history">History</string>
+    <string name="novels">Novels</string>
+    <string name="computer_and_tech">Computer and Tech</string>
+    <string name="about_us">About us</string>
+    <string name="send_us_email">Send Us Email</string>
 </resources>
