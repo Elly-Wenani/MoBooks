@@ -1,6 +1,5 @@
 package com.example.mobooks;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -16,7 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PdfViewerActivity extends AppCompatActivity {
+public class LocalPdfViewerActivity extends AppCompatActivity {
 
     private PDFView mPDFView;
 
@@ -51,7 +50,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -80,7 +79,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -109,7 +108,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -138,7 +137,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -167,7 +166,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -196,7 +195,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -225,7 +224,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -254,7 +253,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -283,7 +282,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {
@@ -312,7 +311,7 @@ public class PdfViewerActivity extends AppCompatActivity {
                         .onError(new OnErrorListener() {
                             @Override
                             public void onError(Throwable t) {
-                                Toast.makeText(PdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .onRender(new OnRenderListener() {

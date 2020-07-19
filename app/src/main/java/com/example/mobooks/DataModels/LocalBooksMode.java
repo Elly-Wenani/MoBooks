@@ -1,11 +1,11 @@
-package com.example.mobooks;
+package com.example.mobooks.DataModels;
 
-public class DataManager {
+public class LocalBooksMode {
     public String bookTitle;
     public String bookAuthor;
     public int bookImage;
 
-    public DataManager(String bookTitle, String bookAuthor) {
+    public LocalBooksMode(String bookTitle, String bookAuthor) {
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
         this.bookImage = bookImage;

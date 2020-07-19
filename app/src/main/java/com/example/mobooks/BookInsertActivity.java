@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 
 
-import com.google.firebase.database.ChildEventListener;
+import com.example.mobooks.DataModels.OnlineBooksMode;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,7 +28,7 @@ public class BookInsertActivity extends AppCompatActivity {
     private EditText insertAuthor;
     private EditText insertImageUrl;
     private EditText insertBookUrl;
-    private BooksMode onlineBooksSet;
+    private OnlineBooksMode onlineBooksSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,9 @@ public class BookInsertActivity extends AppCompatActivity {
         insertBookUrl = findViewById(R.id.insertBookUrl);
 
         final Intent intent = getIntent();
-        BooksMode books = (BooksMode) intent.getSerializableExtra("Books");
+        OnlineBooksMode books = (OnlineBooksMode) intent.getSerializableExtra("Books");
         if (books == null) {
-            books = new BooksMode();
+            books = new OnlineBooksMode();
         }
         this.onlineBooksSet = books;
         insertBookTitle.setText(books.getBkTitle());

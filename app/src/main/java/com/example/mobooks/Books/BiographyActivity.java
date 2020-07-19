@@ -1,4 +1,4 @@
-package com.example.mobooks;
+package com.example.mobooks.Books;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +16,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobooks.Adapters.BiographyAdapter;
+import com.example.mobooks.BookInsertActivity;
+import com.example.mobooks.FirebaseUtil;
+import com.example.mobooks.HomeActivity;
+import com.example.mobooks.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class BiographyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -108,7 +108,6 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
                 FirebaseUtil.detachListener();
                 //return true;
                 break;
-
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -133,10 +132,5 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvBiographyBooks.setLayoutManager(booksLayoutManager);
-        //FirebaseUtil.attachListener();
-    }
-
-    public void showMenu() {
-        invalidateOptionsMenu();
     }
 }

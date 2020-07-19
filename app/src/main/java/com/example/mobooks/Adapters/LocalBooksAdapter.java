@@ -1,4 +1,4 @@
-package com.example.mobooks;
+package com.example.mobooks.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,16 +9,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobooks.DataModels.LocalBooksMode;
+import com.example.mobooks.R;
+
 import java.util.ArrayList;
 
-public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> {
+public class LocalBooksAdapter extends RecyclerView.Adapter<LocalBooksAdapter.ViewHolder> {
 
-    private ArrayList<DataManager> bookDataSet;
+    private ArrayList<LocalBooksMode> bookDataSet;
 
     Context mContext;
     private OnBookClickListener mOnBookClickListener;
 
-    public BooksAdapter(Context mContext, ArrayList<DataManager> mLocalDataSet, OnBookClickListener mOnBookClickListener) {
+    public LocalBooksAdapter(Context mContext, ArrayList<LocalBooksMode> mLocalDataSet, OnBookClickListener mOnBookClickListener) {
         this.bookDataSet = mLocalDataSet;
         this.mContext = mContext;
         this.mOnBookClickListener = mOnBookClickListener;
@@ -39,8 +42,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        DataManager bookTitle = bookDataSet.get(position);
-        DataManager bookAuthor = bookDataSet.get(position);
+        LocalBooksMode bookTitle = bookDataSet.get(position);
+        LocalBooksMode bookAuthor = bookDataSet.get(position);
 
         holder.tvBookTitle.setText(bookTitle.getBookTitle());
         holder.tvBookAuthor.setText(bookAuthor.getBookAuthor());

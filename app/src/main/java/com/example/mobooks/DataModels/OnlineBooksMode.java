@@ -1,8 +1,8 @@
-package com.example.mobooks;
+package com.example.mobooks.DataModels;
 
 import java.io.Serializable;
 
-public class BooksMode implements Serializable {
+public class OnlineBooksMode implements Serializable {
     private String id;
     private String bkTitle;
     private String bkAuthor;
@@ -10,9 +10,9 @@ public class BooksMode implements Serializable {
     private String bkImageName;
     private String bkFileUrl;
 
-    public BooksMode(){}
+    public OnlineBooksMode(){}
 
-    public BooksMode(String bkTitle, String bkAuthor, String bkImageUrl, String bkImageName, String bkFileUrl) {
+    public OnlineBooksMode(String bkTitle, String bkAuthor, String bkImageUrl, String bkImageName, String bkFileUrl) {
         this.setId(id);
         this.setBkTitle(bkTitle);
         this.setBkAuthor(bkAuthor);

@@ -17,6 +17,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobooks.Adapters.LocalBooksAdapter;
+import com.example.mobooks.Books.BiographyActivity;
+import com.example.mobooks.Books.BusinessActivity;
+import com.example.mobooks.DataModels.LocalBooksMode;
 import com.firebase.ui.auth.AuthUI;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,14 +29,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBookClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter.OnBookClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private BooksAdapter mAdapter;
+    private LocalBooksAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private PDFView mPDFView;
-    private ArrayList<DataManager> bookTile;
+    private ArrayList<LocalBooksMode> bookTile;
 
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
@@ -76,23 +80,23 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
         //Populate recycler view
         bookTile = new ArrayList<>();
 
-        bookTile.add(new DataManager("How To Win Friends And Influence People", "Dale Carnegie"));
-        bookTile.add(new DataManager("Wealth Without Theft", "Kolawole Oyeyemi"));
-        bookTile.add(new DataManager("Act Like a Leader, Think Like a Leader", "Herminia Ibarra"));
-        bookTile.add(new DataManager("The Richest Man In Babylon", "George S Classon"));
-        bookTile.add(new DataManager("The Story of My Life", "Helen Keller"));
-        bookTile.add(new DataManager("The Intelligent Investor", "Benjamin Graham"));
-        bookTile.add(new DataManager("Power Score", "Alan Foster"));
-        bookTile.add(new DataManager("I kissed dating goodbye", "Joshua Harris"));
-        bookTile.add(new DataManager("Money with a Mission", "Dr. Leroy Thompson Sr"));
-        bookTile.add(new DataManager("Bob Marley Biography", "Iuliana Cosmina"));
+        bookTile.add(new LocalBooksMode("How To Win Friends And Influence People", "Dale Carnegie"));
+        bookTile.add(new LocalBooksMode("Wealth Without Theft", "Kolawole Oyeyemi"));
+        bookTile.add(new LocalBooksMode("Act Like a Leader, Think Like a Leader", "Herminia Ibarra"));
+        bookTile.add(new LocalBooksMode("The Richest Man In Babylon", "George S Classon"));
+        bookTile.add(new LocalBooksMode("The Story of My Life", "Helen Keller"));
+        bookTile.add(new LocalBooksMode("The Intelligent Investor", "Benjamin Graham"));
+        bookTile.add(new LocalBooksMode("Power Score", "Alan Foster"));
+        bookTile.add(new LocalBooksMode("I kissed dating goodbye", "Joshua Harris"));
+        bookTile.add(new LocalBooksMode("Money with a Mission", "Dr. Leroy Thompson Sr"));
+        bookTile.add(new LocalBooksMode("Bob Marley Biography", "Iuliana Cosmina"));
 
         // Linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // specifying an adapter
-        mAdapter = new BooksAdapter(this, bookTile, this);
+        mAdapter = new LocalBooksAdapter(this, bookTile, this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -100,10 +104,10 @@ public class HomeActivity extends AppCompatActivity implements BooksAdapter.OnBo
     @Override
     public void onBookClick(View v, int position) {
 
-        final DataManager title = bookTile.get(position);
+        final LocalBooksMode title = bookTile.get(position);
         String mTitle = title.getBookTitle();
 
-        Intent intent = new Intent(v.getContext(), PdfViewerActivity.class);
+        Intent intent = new Intent(v.getContext(), LocalPdfViewerActivity.class);
         intent.putExtra("pdfFileName", mTitle);
         v.getContext().startActivity(intent);
     }

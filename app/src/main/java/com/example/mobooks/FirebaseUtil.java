@@ -1,11 +1,13 @@
 package com.example.mobooks;
 
-import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.mobooks.Books.BiographyActivity;
+import com.example.mobooks.Books.BusinessActivity;
+import com.example.mobooks.DataModels.OnlineBooksMode;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -29,7 +31,7 @@ public class FirebaseUtil {
     public static FirebaseStorage mStorage;
     public static StorageReference mStorageReference;
     public static FirebaseAuth.AuthStateListener mAuthStateListener;
-    public static ArrayList<BooksMode> onlineBooksSet;
+    public static ArrayList<OnlineBooksMode> onlineBooksSet;
     private static final int RC_SIGN_IN = 123;
     private static HomeActivity callerCheck;
     private static BusinessActivity callerBus;

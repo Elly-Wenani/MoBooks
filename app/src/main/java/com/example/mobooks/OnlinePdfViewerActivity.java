@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import android.content.Intent;
 
+import com.example.mobooks.DataModels.OnlineBooksMode;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnRenderListener;
@@ -40,7 +41,7 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
-    BooksMode onlineBooksSet;
+    OnlineBooksMode onlineBooksSet;
 
     private SeekBar mSeekBar;
     private TextView mLoading;
@@ -58,11 +59,11 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
-        //Get passed intent from BsBooksAdapter
+        //Get passed intent from BusinessAdapter
         final Intent intent = getIntent();
-        BooksMode onlineBooksSet = (BooksMode) intent.getSerializableExtra("Books");
+        OnlineBooksMode onlineBooksSet = (OnlineBooksMode) intent.getSerializableExtra("Books");
         if (onlineBooksSet == null) {
-            onlineBooksSet = new BooksMode();
+            onlineBooksSet = new OnlineBooksMode();
         }
         this.onlineBooksSet = onlineBooksSet;
         initSeekBar();

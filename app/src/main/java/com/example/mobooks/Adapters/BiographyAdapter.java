@@ -1,4 +1,4 @@
-package com.example.mobooks;
+package com.example.mobooks.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobooks.DataModels.OnlineBooksMode;
+import com.example.mobooks.FirebaseUtil;
+import com.example.mobooks.OnlinePdfViewerActivity;
+import com.example.mobooks.R;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,12 +29,11 @@ import java.util.ArrayList;
 
 public class BiographyAdapter extends RecyclerView.Adapter<BiographyAdapter.BioViewHolder>{
 
-    ArrayList<BooksMode> onlineBooksSet;
+    ArrayList<OnlineBooksMode> onlineBooksSet;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
     private ImageView onlineBookImage;
-    private PDFView onlineMPDFView;
 
     public BiographyAdapter() {
 
@@ -40,7 +43,7 @@ public class BiographyAdapter extends RecyclerView.Adapter<BiographyAdapter.BioV
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                BooksMode td = snapshot.getValue(BooksMode.class);
+                OnlineBooksMode td = snapshot.getValue(OnlineBooksMode.class);
                 Log.d("Biography Book: ", td.getBkTitle());
                 td.setId(snapshot.getKey());
                 onlineBooksSet.add(td);
@@ -81,8 +84,8 @@ public class BiographyAdapter extends RecyclerView.Adapter<BiographyAdapter.BioV
 
     @Override
     public void onBindViewHolder(@NonNull BiographyAdapter.BioViewHolder holder, int position) {
-        BooksMode booksMode = onlineBooksSet.get(position);
-        holder.bind(booksMode);
+        OnlineBooksMode onlineBooksMode = onlineBooksSet.get(position);
+        holder.bind(onlineBooksMode);
     }
 
     @Override
@@ -103,10 +106,10 @@ public class BiographyAdapter extends RecyclerView.Adapter<BiographyAdapter.BioV
             itemView.setOnClickListener(this);
         }
 
-        public void bind(BooksMode booksMode) {
-            tvTitle.setText(booksMode.getBkTitle());
-            tvAuthor.setText(booksMode.getBkAuthor());
-            showImage(booksMode.getBkImageUrl());
+        public void bind(OnlineBooksMode onlineBooksMode) {
+            tvTitle.setText(onlineBooksMode.getBkTitle());
+            tvAuthor.setText(onlineBooksMode.getBkAuthor());
+            showImage(onlineBooksMode.getBkImageUrl());
         }
 
         //Pass intent to OnlinePdfViewer Activity
@@ -114,7 +117,7 @@ public class BiographyAdapter extends RecyclerView.Adapter<BiographyAdapter.BioV
         public void onClick(View v) {
             int position = getAdapterPosition();
             Log.d("Click: ", String.valueOf(position));
-            BooksMode selectedDeal = onlineBooksSet.get(position);
+            OnlineBooksMode selectedDeal = onlineBooksSet.get(position);
             Intent intent = new Intent(v.getContext(), OnlinePdfViewerActivity.class);
             intent.putExtra("Books", selectedDeal);
             v.getContext().startActivity(intent);
