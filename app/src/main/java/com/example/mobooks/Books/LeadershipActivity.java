@@ -1,11 +1,5 @@
 package com.example.mobooks.Books;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-import com.example.mobooks.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobooks.Adapters.BiographyAdapter;
+import com.example.mobooks.Adapters.LeadershipAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;

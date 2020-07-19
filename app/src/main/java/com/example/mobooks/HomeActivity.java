@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobooks.Adapters.LocalBooksAdapter;
 import com.example.mobooks.Books.BiographyActivity;
 import com.example.mobooks.Books.BusinessActivity;
+import com.example.mobooks.Books.LeadershipActivity;
 import com.example.mobooks.DataModels.LocalBooksMode;
 import com.firebase.ui.auth.AuthUI;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -137,6 +138,12 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
             case R.id.nav_biography:
                 Intent bio = new Intent(this, BiographyActivity.class);
                 startActivity(bio);
+                finish();
+                break;
+
+            case R.id.nav_leadership:
+                Intent lead = new Intent(this, LeadershipActivity.class);
+                startActivity(lead);
                 finish();
                 break;
 

@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.mobooks.DataModels.OnlineBooksMode;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.OnlinePdfViewerActivity;
 import com.example.mobooks.R;
-import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.DealViewHolder> {
+public class LeadershipAdapter extends RecyclerView.Adapter<LeadershipAdapter.LeaViewHolder> {
 
     ArrayList<OnlineBooksMode> onlineBooksSet;
     private FirebaseDatabase mFirebaseDatabase;
@@ -35,7 +35,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.DealVi
     private ChildEventListener mChildEventListener;
     private ImageView onlineBookImage;
 
-    public BusinessAdapter() {
+    public LeadershipAdapter() {
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
@@ -44,7 +44,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.DealVi
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 OnlineBooksMode td = snapshot.getValue(OnlineBooksMode.class);
-                Log.d("Business Book: ", td.getBkTitle());
+                Log.d("Leadership Book: ", td.getBkTitle());
                 td.setId(snapshot.getKey());
                 onlineBooksSet.add(td);
                 notifyItemInserted(onlineBooksSet.size() - 1);
@@ -75,15 +75,15 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.DealVi
 
     @NonNull
     @Override
-    public DealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LeaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.books_row, parent, false);
-        return new DealViewHolder(itemView);
+        return new LeaViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DealViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LeaViewHolder holder, int position) {
         OnlineBooksMode onlineBooksMode = onlineBooksSet.get(position);
         holder.bind(onlineBooksMode);
     }
@@ -93,12 +93,12 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.DealVi
         return onlineBooksSet.size();
     }
 
-    public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class LeaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTitle;
         TextView tvAuthor;
 
-        public DealViewHolder(@NonNull View itemView) {
+        public LeaViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.idTvTitle);
             tvAuthor = itemView.findViewById(R.id.idTvAuthor);

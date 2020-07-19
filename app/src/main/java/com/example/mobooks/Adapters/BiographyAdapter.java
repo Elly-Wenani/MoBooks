@@ -17,7 +17,6 @@ import com.example.mobooks.DataModels.OnlineBooksMode;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.OnlinePdfViewerActivity;
 import com.example.mobooks.R;
-import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
