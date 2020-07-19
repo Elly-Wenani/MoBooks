@@ -119,6 +119,12 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                 finish();
                 break;
 
+            case R.id.nav_leadership:
+                Intent lead = new Intent(this, LeadershipActivity.class);
+                startActivity(lead);
+                finish();
+                break;
+
             case R.id.nav_insert:
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);

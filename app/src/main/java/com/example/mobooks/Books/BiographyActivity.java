@@ -86,6 +86,12 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
                 finish();
                 break;
 
+            case R.id.nav_leadership:
+                Intent lead = new Intent(this, LeadershipActivity.class);
+                startActivity(lead);
+                finish();
+                break;
+
             case R.id.nav_business:
                 Intent bus = new Intent(this, BusinessActivity.class);
                 startActivity(bus);
