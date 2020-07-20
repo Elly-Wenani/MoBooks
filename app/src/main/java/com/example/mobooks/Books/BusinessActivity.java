@@ -1,6 +1,7 @@
 package com.example.mobooks.Books;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -32,10 +33,6 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
 
-//    ProgressDialog mProgressDialog;
-//    CountDownTimer mCountDownTimer;
-//    int i = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +40,6 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Business Books");
-
-//        //Fore progress dialog timing
-//        mProgressDialog = new ProgressDialog(this);
-//        mProgressDialog.setMessage("Loading...");
-//        mProgressDialog.setCancelable(false);
-//        mProgressDialog.setProgress(i);
-//        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -75,20 +64,6 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         } else {
             menu.findItem(R.id.nav_insert).setVisible(false);
         }
-
-//        //Progress dialog timing
-//        mProgressDialog.show();
-//        mCountDownTimer = new CountDownTimer(2000, 1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                mProgressDialog.setMessage("Loading...");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                mProgressDialog.dismiss();
-//            }
-//        }.start();
     }
 
     @Override
@@ -129,6 +104,10 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
 
+            case R.id.nav_email:
+                mailTo(new String[]{getString(R.string.mobooks_email_address)}, getString(R.string.mobooks_subject));
+                break;
+
             case R.id.nav_logout:
                 AuthUI.getInstance()
                         .signOut(this)
@@ -147,6 +126,20 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         drawer.closeDrawer(GravityCompat.START);
         return false;
     }
+
+    //This method directs the user to their default mailing app to send
+    // the email
+    private void mailTo(String[] emailAddresses, String subject) {
+        Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+        sendEmail.setData(Uri.parse("mailto:"));
+        sendEmail.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
+        sendEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+        if (sendEmail.resolveActivity(getPackageManager()) != null) {
+            startActivity(sendEmail);
+        }
+    }
+
 
     @Override
     protected void onPause() {

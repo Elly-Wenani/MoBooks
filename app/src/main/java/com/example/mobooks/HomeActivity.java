@@ -1,6 +1,7 @@
 package com.example.mobooks;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -164,10 +165,28 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
                 break;
+
+            case R.id.nav_email:
+                //Method to send email
+                mailTo(new String[]{getString(R.string.mobooks_email_address)}, getString(R.string.mobooks_subject));
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    //This method directs the user to their default mailing app to send
+    // the email
+    private void mailTo(String[] emailAddresses, String subject) {
+        Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+        sendEmail.setData(Uri.parse("mailto:"));
+        sendEmail.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
+        sendEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+        if (sendEmail.resolveActivity(getPackageManager()) != null){
+            startActivity(sendEmail);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.mobooks.Books;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -102,6 +103,10 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
 
+            case R.id.nav_email:
+                mailTo(new String[]{getString(R.string.mobooks_email_address)}, getString(R.string.mobooks_subject));
+                break;
+
             case R.id.nav_logout:
                 AuthUI.getInstance()
                         .signOut(this)
@@ -118,6 +123,19 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
 
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    //This method directs the user to their default mailing app to send
+    // the email
+    private void mailTo(String[] emailAddresses, String subject) {
+        Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+        sendEmail.setData(Uri.parse("mailto:"));
+        sendEmail.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
+        sendEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+        if (sendEmail.resolveActivity(getPackageManager()) != null){
+            startActivity(sendEmail);
+        }
     }
 
     @Override
