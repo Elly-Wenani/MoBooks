@@ -165,6 +165,10 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
                 //Method to send email
                 mailTo(new String[]{getString(R.string.mobooks_email_address)}, getString(R.string.mobooks_subject));
                 break;
+
+            case R.id.nav_info:
+                Intent about = new Intent(this, InfoActivity.class);
+                startActivity(about);
         }
 
         drawer.closeDrawer(GravityCompat.START);

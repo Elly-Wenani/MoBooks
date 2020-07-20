@@ -44,9 +44,10 @@
     <string name="history">History</string>
     <string name="novels">Novels</string>
     <string name="computer_and_tech">Computer and Tech</string>
-    <string name="about_us">About us</string>
+    <string name="info">Info</string>
     <string name="send_us_email">Send Us Email</string>
     <string name="mobooks_email_address">ellywenani@gmail.com</string>
     <string name="mobooks_subject">MoBooks Version 1.0</string>
     <string name="share_message">Hey, am having great time reading books with this cool app MoBooks. I has great content I recommend you check it out on Google PlayStore</string>
+    <string name="text_about">MoBooks is an application that has a variety of books in different categories. Feel free to share the app with your friends and loved ones to spread knowledge MoBooks is an application that has a variety of books in different categories. Feel free to share the app with your friends and loved ones to spread knowledge MoBooks is an application that has a variety of books  in different categories. Feel free to share the app with your friends and loved ones to spread knowledge</string>
 </resources>
