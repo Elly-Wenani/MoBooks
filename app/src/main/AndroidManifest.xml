@@ -15,8 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InfoActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.Dialog.Alert"/>
+        <activity android:name=".Books.TechnologyActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".InfoActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.Dialog.Alert" />
         <activity
             android:name=".Books.LeadershipActivity"
             android:theme="@style/AppTheme.NoActionBar" />
