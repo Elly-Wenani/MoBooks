@@ -22,6 +22,7 @@ import com.example.mobooks.Adapters.LocalBooksAdapter;
 import com.example.mobooks.Books.BiographyActivity;
 import com.example.mobooks.Books.BusinessActivity;
 import com.example.mobooks.Books.LeadershipActivity;
+import com.example.mobooks.Books.TechnologyActivity;
 import com.example.mobooks.DataModels.LocalBooksMode;
 import com.firebase.ui.auth.AuthUI;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -133,6 +134,12 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
             case R.id.nav_business:
                 Intent bus = new Intent(this, BusinessActivity.class);
                 startActivity(bus);
+                finish();
+                break;
+
+            case R.id.nav_compTech:
+                Intent tech = new Intent(this, TechnologyActivity.class);
+                startActivity(tech);
                 finish();
                 break;
 

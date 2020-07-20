@@ -17,7 +17,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobooks.Adapters.BiographyAdapter;
 import com.example.mobooks.Adapters.LeadershipAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
@@ -97,6 +96,12 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
             case R.id.nav_business:
                 Intent bus = new Intent(this, BusinessActivity.class);
                 startActivity(bus);
+                finish();
+                break;
+
+            case R.id.nav_compTech:
+                Intent tech = new Intent(this, TechnologyActivity.class);
+                startActivity(tech);
                 finish();
                 break;
 
