@@ -166,6 +166,10 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
                 startActivity(insert);
                 break;
 
+            case R.id.nav_share:
+                shareApp(getString(R.string.share_message));
+                break;
+
             case R.id.nav_email:
                 //Method to send email
                 mailTo(new String[]{getString(R.string.mobooks_email_address)}, getString(R.string.mobooks_subject));
@@ -176,6 +180,15 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
         return false;
     }
 
+    private void shareApp(String textMessage) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+        shareIntent.setType("text/plain");
+        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(shareIntent);
+        }
+    }
+
     //This method directs the user to their default mailing app to send
     // the email
     private void mailTo(String[] emailAddresses, String subject) {
@@ -184,7 +197,7 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
         sendEmail.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
         sendEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
 
-        if (sendEmail.resolveActivity(getPackageManager()) != null){
+        if (sendEmail.resolveActivity(getPackageManager()) != null) {
             startActivity(sendEmail);
         }
     }

@@ -104,6 +104,10 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
 
+            case R.id.nav_share:
+                shareApp(getString(R.string.share_message));
+                break;
+
             case R.id.nav_email:
                 mailTo(new String[]{getString(R.string.mobooks_email_address)}, getString(R.string.mobooks_subject));
                 break;
@@ -123,6 +127,15 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
 
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    private void shareApp(String textMessage) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+        shareIntent.setType("text/plain");
+        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(shareIntent);
+        }
     }
 
     //This method directs the user to their default mailing app to send
