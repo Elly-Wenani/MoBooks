@@ -113,22 +113,25 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                 break;
 
             case R.id.nav_logout:
-                AuthUI.getInstance()
-                        .signOut(this)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Log.d("Logout", "User logged out");
-                                FirebaseUtil.attachListener();
-                            }
-                        });
-                FirebaseUtil.detachListener();
-                //return true;
+                logOut();
                 break;
 
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    private void logOut() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("Logout", "User logged out");
+                        FirebaseUtil.attachListener();
+                    }
+                });
+        FirebaseUtil.detachListener();
     }
 
     private void shareApp(String textMessage) {
@@ -152,7 +155,6 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
             startActivity(sendEmail);
         }
     }
-
 
     @Override
     protected void onPause() {
