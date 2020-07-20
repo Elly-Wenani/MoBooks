@@ -1,11 +1,5 @@
 package com.example.mobooks.Books;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-import com.example.mobooks.R;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -114,6 +108,7 @@ public class TechnologyActivity extends AppCompatActivity implements NavigationV
             case R.id.nav_insert:
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
+                break;
 
             case R.id.nav_share:
                 shareApp(getString(R.string.share_message));

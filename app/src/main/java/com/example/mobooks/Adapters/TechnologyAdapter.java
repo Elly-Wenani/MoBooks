@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.BusViewHolder> {
+public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.TechViewHolder>{
 
     ArrayList<OnlineBooksMode> onlineBooksSet;
     private FirebaseDatabase mFirebaseDatabase;
@@ -34,7 +34,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.BusVie
     private ChildEventListener mChildEventListener;
     private ImageView onlineBookImage;
 
-    public BusinessAdapter() {
+    public TechnologyAdapter() {
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
@@ -43,7 +43,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.BusVie
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 OnlineBooksMode td = snapshot.getValue(OnlineBooksMode.class);
-                Log.d("Business Book: ", td.getBkTitle());
+                Log.d("Technology Book: ", td.getBkTitle());
                 td.setId(snapshot.getKey());
                 onlineBooksSet.add(td);
                 notifyItemInserted(onlineBooksSet.size() - 1);
@@ -74,15 +74,15 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.BusVie
 
     @NonNull
     @Override
-    public BusViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TechViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.books_row, parent, false);
-        return new BusViewHolder(itemView);
+        return new TechViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BusViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TechViewHolder holder, int position) {
         OnlineBooksMode onlineBooksMode = onlineBooksSet.get(position);
         holder.bind(onlineBooksMode);
     }
@@ -92,12 +92,12 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.BusVie
         return onlineBooksSet.size();
     }
 
-    public class BusViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class TechViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTitle;
         TextView tvAuthor;
 
-        public BusViewHolder(@NonNull View itemView) {
+        public TechViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.idTvTitle);
             tvAuthor = itemView.findViewById(R.id.idTvAuthor);
