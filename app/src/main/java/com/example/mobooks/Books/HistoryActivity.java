@@ -17,8 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.mobooks.Adapters.BusinessAdapter;
-import com.example.mobooks.Adapters.HistoryAdapter;
+import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;
@@ -182,7 +181,7 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
         FirebaseUtil.openFbReferenceHis("historyBooks", this);
         FirebaseUtil.attachListener();
         RecyclerView rvHistoryBooks = findViewById(R.id.rvHistoryBooks);
-        final HistoryAdapter adapter = new HistoryAdapter();
+        final OnlineBooksAdapter adapter = new OnlineBooksAdapter();
         rvHistoryBooks.setAdapter(adapter);
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

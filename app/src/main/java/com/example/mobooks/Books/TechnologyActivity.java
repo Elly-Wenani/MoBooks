@@ -17,8 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobooks.Adapters.LeadershipAdapter;
-import com.example.mobooks.Adapters.TechnologyAdapter;
+import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;
@@ -181,7 +180,7 @@ public class TechnologyActivity extends AppCompatActivity implements NavigationV
         FirebaseUtil.openFbReferenceTech("technologyBooks", this);
         FirebaseUtil.attachListener();
         RecyclerView rvTechnologyBooks = findViewById(R.id.rvTechnologyBooks);
-        final TechnologyAdapter adapter = new TechnologyAdapter();
+        final OnlineBooksAdapter adapter = new OnlineBooksAdapter();
         rvTechnologyBooks.setAdapter(adapter);
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

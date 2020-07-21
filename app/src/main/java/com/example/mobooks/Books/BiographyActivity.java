@@ -17,7 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobooks.Adapters.BiographyAdapter;
+import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;
@@ -174,7 +174,7 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
         FirebaseUtil.openFbReferenceBio("biographyBooks", this);
         FirebaseUtil.attachListener();
         RecyclerView rvBiographyBooks = findViewById(R.id.rvBiographyBooks);
-        final BiographyAdapter adapter = new BiographyAdapter();
+        final OnlineBooksAdapter adapter = new OnlineBooksAdapter();
         rvBiographyBooks.setAdapter(adapter);
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

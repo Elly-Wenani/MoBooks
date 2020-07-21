@@ -17,9 +17,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobooks.Adapters.BusinessAdapter;
+import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
-import com.example.mobooks.Books.BiographyActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;
 import com.example.mobooks.R;
@@ -182,7 +181,7 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         FirebaseUtil.openFbReferenceBus("businessBooks", this);
         FirebaseUtil.attachListener();
         RecyclerView rvBusinessBooks = findViewById(R.id.rvBusinessBooks);
-        final BusinessAdapter adapter = new BusinessAdapter();
+        final OnlineBooksAdapter adapter = new OnlineBooksAdapter();
         rvBusinessBooks.setAdapter(adapter);
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

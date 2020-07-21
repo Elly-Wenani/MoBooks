@@ -17,7 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobooks.Adapters.LeadershipAdapter;
+import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;
@@ -180,7 +180,7 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
         FirebaseUtil.openFbReferenceLea("leadershipBooks", this);
         FirebaseUtil.attachListener();
         RecyclerView rvLeadershipBooks = findViewById(R.id.rvLeadershipBooks);
-        final LeadershipAdapter adapter = new LeadershipAdapter();
+        final OnlineBooksAdapter adapter = new OnlineBooksAdapter();
         rvLeadershipBooks.setAdapter(adapter);
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

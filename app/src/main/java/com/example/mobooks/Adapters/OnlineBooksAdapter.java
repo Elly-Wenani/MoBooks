@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HisViewHolder>{
+public class OnlineBooksAdapter extends RecyclerView.Adapter<OnlineBooksAdapter.ViewHolder> {
 
     ArrayList<OnlineBooksMode> onlineBooksSet;
     private FirebaseDatabase mFirebaseDatabase;
@@ -34,7 +35,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HisViewH
     private ChildEventListener mChildEventListener;
     private ImageView onlineBookImage;
 
-    public HistoryAdapter() {
+    public OnlineBooksAdapter() {
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
@@ -43,7 +44,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HisViewH
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 OnlineBooksMode td = snapshot.getValue(OnlineBooksMode.class);
-                Log.d("History Book: ", td.getBkTitle());
+                Log.d("Book title: ", td.getBkTitle());
                 td.setId(snapshot.getKey());
                 onlineBooksSet.add(td);
                 notifyItemInserted(onlineBooksSet.size() - 1);
@@ -66,7 +67,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HisViewH
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         };
         mDatabaseReference.addChildEventListener(mChildEventListener);
@@ -74,15 +74,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HisViewH
 
     @NonNull
     @Override
-    public HisViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.books_row, parent, false);
-        return new HisViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HistoryAdapter.HisViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OnlineBooksMode onlineBooksMode = onlineBooksSet.get(position);
         holder.bind(onlineBooksMode);
     }
@@ -92,12 +92,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HisViewH
         return onlineBooksSet.size();
     }
 
-    public class HisViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTitle;
         TextView tvAuthor;
 
-        public HisViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.idTvTitle);
             tvAuthor = itemView.findViewById(R.id.idTvAuthor);
