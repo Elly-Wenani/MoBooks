@@ -1,5 +1,6 @@
 package com.example.mobooks;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -160,8 +162,15 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
                 break;
 
             case R.id.nav_insert:
-                Intent insert = new Intent(this, BookInsertActivity.class);
-                startActivity(insert);
+                new AlertDialog.Builder(this)
+                        .setTitle("MoBooks")
+                        .setMessage("You cant insert books on most read books")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //...
+                            }
+                        });
                 break;
 
             case R.id.nav_share:
@@ -176,6 +185,7 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
             case R.id.nav_info:
                 Intent about = new Intent(this, InfoActivity.class);
                 startActivity(about);
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

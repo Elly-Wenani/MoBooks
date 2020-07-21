@@ -94,6 +94,12 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
                 finish();
                 break;
 
+            case R.id.nav_compTech:
+                Intent tech = new Intent(this, TechnologyActivity.class);
+                startActivity(tech);
+                finish();
+                break;
+
             case R.id.nav_leadership:
                 Intent lead = new Intent(this, LeadershipActivity.class);
                 startActivity(lead);
@@ -103,6 +109,7 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_insert:
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
+                break;
 
             case R.id.nav_share:
                 shareApp(getString(R.string.share_message));

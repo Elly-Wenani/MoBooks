@@ -102,6 +102,7 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_insert:
                 Intent insert = new Intent(this, BookInsertActivity.class);
                 startActivity(insert);
+                break;
 
             case R.id.nav_share:
                 shareApp(getString(R.string.share_message));
