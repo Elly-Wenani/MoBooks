@@ -99,6 +99,12 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
                 finish();
                 break;
 
+            case R.id.nav_history:
+                Intent hist = new Intent(this, HistoryActivity.class);
+                startActivity(hist);
+                finish();
+                break;
+
             case R.id.nav_compTech:
                 Intent tech = new Intent(this, TechnologyActivity.class);
                 startActivity(tech);

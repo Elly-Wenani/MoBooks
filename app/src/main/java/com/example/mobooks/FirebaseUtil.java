@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.example.mobooks.Books.BiographyActivity;
 import com.example.mobooks.Books.BusinessActivity;
+import com.example.mobooks.Books.HistoryActivity;
 import com.example.mobooks.Books.LeadershipActivity;
 import com.example.mobooks.Books.TechnologyActivity;
 import com.example.mobooks.DataModels.OnlineBooksMode;
@@ -40,6 +41,7 @@ public class FirebaseUtil {
     private static BiographyActivity callerBio;
     private static LeadershipActivity callerLea;
     private static TechnologyActivity callerTech;
+    private static HistoryActivity callerHis;
 
     private FirebaseUtil() {
     }
@@ -158,6 +160,32 @@ public class FirebaseUtil {
 
             mFirebaseAuth = FirebaseAuth.getInstance();
             callerTech = callerActivityTech;
+
+            mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    if (firebaseAuth.getCurrentUser() == null) {
+                        FirebaseUtil.singIn();
+                    } else {
+                        String userId = firebaseAuth.getUid();
+                        checkAdmin(userId);
+                    }
+                }
+            };
+            connectStorage();
+        }
+        onlineBooksSet = new ArrayList<>();
+        mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
+    }
+
+    //Method populates HistoryActivity with history books from firebase database
+    public static void openFbReferenceHis(String ref, final HistoryActivity callerActivityHis) {
+        if (mFirebaseUtil == null) {
+            mFirebaseUtil = new FirebaseUtil();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+            mFirebaseAuth = FirebaseAuth.getInstance();
+            callerHis = callerActivityHis;
 
             mAuthStateListener = new FirebaseAuth.AuthStateListener() {
                 @Override

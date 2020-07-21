@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobooks.Adapters.LocalBooksAdapter;
 import com.example.mobooks.Books.BiographyActivity;
 import com.example.mobooks.Books.BusinessActivity;
+import com.example.mobooks.Books.HistoryActivity;
 import com.example.mobooks.Books.LeadershipActivity;
 import com.example.mobooks.Books.TechnologyActivity;
 import com.example.mobooks.DataModels.LocalBooksMode;
@@ -157,6 +158,12 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
                 finish();
                 break;
 
+            case R.id.nav_history:
+                Intent hist = new Intent(this, HistoryActivity.class);
+                startActivity(hist);
+                finish();
+                break;
+
             case R.id.nav_logout:
                 logOut();
                 break;
@@ -164,13 +171,13 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
             case R.id.nav_insert:
                 new AlertDialog.Builder(this)
                         .setTitle("MoBooks")
-                        .setMessage("You cant insert books on most read books")
+                        .setMessage("You cant insert books on local database. Kindly upload to other categories")
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //...
                             }
-                        });
+                        }).show();
                 break;
 
             case R.id.nav_share:
