@@ -21,6 +21,7 @@ import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;
+import com.example.mobooks.InfoActivity;
 import com.example.mobooks.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -134,6 +135,10 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
                 logOut();
                 break;
 
+            case R.id.nav_info:
+                Intent about = new Intent(this, InfoActivity.class);
+                startActivity(about);
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -184,7 +189,7 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
     protected void onResume() {
         super.onResume();
 
-        FirebaseUtil.openFbReferenceNov("historyBooks", this);
+        FirebaseUtil.openFbReferenceNov("novelsBooks", this);
         FirebaseUtil.attachListener();
         RecyclerView rvNovelsBooks = findViewById(R.id.rvNovelsBooks);
         final OnlineBooksAdapter adapter = new OnlineBooksAdapter();

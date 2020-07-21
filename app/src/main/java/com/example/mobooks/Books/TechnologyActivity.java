@@ -21,6 +21,7 @@ import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
 import com.example.mobooks.FirebaseUtil;
 import com.example.mobooks.HomeActivity;
+import com.example.mobooks.InfoActivity;
 import com.example.mobooks.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -132,6 +133,11 @@ public class TechnologyActivity extends AppCompatActivity implements NavigationV
 
             case R.id.nav_logout:
                 logOut();
+                break;
+
+            case R.id.nav_info:
+                Intent about = new Intent(this, InfoActivity.class);
+                startActivity(about);
                 break;
         }
 
