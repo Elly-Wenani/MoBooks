@@ -99,9 +99,21 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
                 finish();
                 break;
 
+            case R.id.nav_compTech:
+                Intent tech = new Intent(this, TechnologyActivity.class);
+                startActivity(tech);
+                finish();
+                break;
+
             case R.id.nav_history:
                 Intent hist = new Intent(this, HistoryActivity.class);
                 startActivity(hist);
+                finish();
+                break;
+
+            case R.id.nav_novels:
+                Intent nov = new Intent(this, NovelsActivity.class);
+                startActivity(nov);
                 finish();
                 break;
 

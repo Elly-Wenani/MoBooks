@@ -25,6 +25,7 @@ import com.example.mobooks.Books.BiographyActivity;
 import com.example.mobooks.Books.BusinessActivity;
 import com.example.mobooks.Books.HistoryActivity;
 import com.example.mobooks.Books.LeadershipActivity;
+import com.example.mobooks.Books.NovelsActivity;
 import com.example.mobooks.Books.TechnologyActivity;
 import com.example.mobooks.DataModels.LocalBooksMode;
 import com.firebase.ui.auth.AuthUI;
@@ -161,6 +162,12 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
             case R.id.nav_history:
                 Intent hist = new Intent(this, HistoryActivity.class);
                 startActivity(hist);
+                finish();
+                break;
+
+            case R.id.nav_novels:
+                Intent nov = new Intent(this, NovelsActivity.class);
+                startActivity(nov);
                 finish();
                 break;
 

@@ -27,7 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
-public class HistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class HistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
@@ -108,6 +108,12 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_business:
                 Intent bus = new Intent(this, BusinessActivity.class);
                 startActivity(bus);
+                finish();
+                break;
+
+            case R.id.nav_novels:
+                Intent nov = new Intent(this, NovelsActivity.class);
+                startActivity(nov);
                 finish();
                 break;
 
