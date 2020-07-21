@@ -50,4 +50,5 @@
     <string name="mobooks_subject">MoBooks Version 1.0</string>
     <string name="share_message">Hey, am having great time reading books with this cool app MoBooks. I has great content I recommend you check it out on Google PlayStore</string>
     <string name="text_about">MoBooks is an application that has a variety of books in different categories. Feel free to share the app with your friends and loved ones to spread knowledge MoBooks is an application that has a variety of books in different categories. Feel free to share the app with your friends and loved ones to spread knowledge MoBooks is an application that has a variety of books  in different categories. Feel free to share the app with your friends and loved ones to spread knowledge</string>
+    <string name="alert_re_load">The previous download was interrupted. Kindly re-open this book again to load!\n Note: Do not interrupt loading process</string>
 </resources>

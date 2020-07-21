@@ -188,9 +188,7 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
     //This method alerts the user to re-load the file again if it failed loading
     private void alertMessage() {
         new AlertDialog.Builder(this)
-                .setMessage("The previous download was interrupted. Kindly " +
-                        "re-open this book again to load!\n" +
-                        "Note: Do not interrupt loading process")
+                .setMessage(R.string.alert_re_load)
                 .setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         OnlinePdfViewerActivity.this.finish();
@@ -202,14 +200,15 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
 
     private void initSeekBar() {
         mSeekBar = findViewById(R.id.seekBar);
-        mSeekBar.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
-        mSeekBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+//        mSeekBar.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+//        mSeekBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int val = (progress * (seekBar.getWidth()) - 4
                         * seekBar.getThumbOffset()) / seekBar.getMax();
-                tvSeekBar.setText("" + progress);
+                tvSeekBar.setText(progress + "%");
+                seekBar.setEnabled(false);
                 tvSeekBar.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
             }
 
