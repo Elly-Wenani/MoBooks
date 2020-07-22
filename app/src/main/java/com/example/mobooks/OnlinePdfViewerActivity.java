@@ -200,7 +200,8 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
 
     private void initSeekBar() {
         mSeekBar = findViewById(R.id.seekBar);
-//        mSeekBar.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+        mSeekBar.setEnabled(false);
+//        mSeekBar.getProgressDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
 //        mSeekBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -208,7 +209,6 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
                 int val = (progress * (seekBar.getWidth()) - 4
                         * seekBar.getThumbOffset()) / seekBar.getMax();
                 tvSeekBar.setText(progress + "%");
-                seekBar.setEnabled(false);
                 tvSeekBar.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
             }
 

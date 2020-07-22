@@ -8,12 +8,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 
 import com.example.mobooks.DataModels.OnlineBooksMode;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 
 import android.view.MenuItem;
@@ -117,9 +121,14 @@ public class BookInsertActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_delete:
-                Toast.makeText(this, "Perform Delete", Toast.LENGTH_SHORT).show();
+                deleteBook();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteBook() {
+            Toast.makeText(this, "To delete book", Toast.LENGTH_SHORT).show();
     }
 
     private void clearText() {
@@ -135,14 +144,38 @@ public class BookInsertActivity extends AppCompatActivity {
         onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());
         onlineBooksSet.setBkImageUrl(insertImageUrl.getText().toString().trim());
         onlineBooksSet.setBkFileUrl(insertBookUrl.getText().toString().trim());
-        Toast.makeText(this, "Book Saved", Toast.LENGTH_SHORT).show();
 
         //Updates the values
         if (onlineBooksSet.getId() == null) {
-            mDatabaseReference.push().setValue(onlineBooksSet);
+            mDatabaseReference.push().setValue(onlineBooksSet)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(), "Book Saved", Toast.LENGTH_SHORT).show();
+                            clearText();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed to save books", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         } else {
-            mDatabaseReference.child(onlineBooksSet.getId()).setValue(onlineBooksSet);
+            mDatabaseReference.child(onlineBooksSet.getId()).setValue(onlineBooksSet)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(), "Book Saved", Toast.LENGTH_SHORT).show();
+                            clearText();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed to save books", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
-        clearText();
     }
 }
