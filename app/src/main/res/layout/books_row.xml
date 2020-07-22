@@ -9,8 +9,7 @@
         android:id="@+id/myCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
+        app:cardElevation="8dp"
         app:contentPadding="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/idBookImage"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +47,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/idBookImage"
                 app:layout_constraintTop_toBottomOf="@+id/idTvTitle" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="18dp"
+                android:background="@color/cardview_shadow_start_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/idTvAuthor"
+                app:layout_constraintTop_toBottomOf="@+id/idTvAuthor" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
