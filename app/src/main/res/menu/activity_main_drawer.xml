@@ -52,9 +52,10 @@
                     android:icon="@drawable/ic_logout"
                     android:title="@string/logout" />
 
-                <item android:id="@+id/nav_insert"
-                    android:title="@string/insert_book"
-                    android:icon="@drawable/ic_add"/>
+                <item
+                    android:id="@+id/nav_insert"
+                    android:icon="@drawable/ic_add"
+                    android:title="@string/insert_book" />
 
             </group>
         </menu>
@@ -64,21 +65,25 @@
         <menu>
             <group android:checkableBehavior="single">
 
-                <item android:id="@+id/nav_rate"
-                    android:title="@string/rate"
-                    android:icon="@drawable/ic_rate"/>
+                <item
+                    android:id="@+id/nav_rate"
+                    android:icon="@drawable/ic_rate"
+                    android:title="@string/rate" />
 
-                <item android:id="@+id/nav_share"
-                    android:title="@string/share"
-                    android:icon="@drawable/ic_share"/>
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_share"
+                    android:title="@string/share" />
 
-                <item android:id="@+id/nav_email"
-                    android:title="@string/send_us_email"
-                    android:icon="@drawable/ic_email"/>
+                <item
+                    android:id="@+id/nav_email"
+                    android:icon="@drawable/ic_email"
+                    android:title="@string/send_us_email" />
 
-                <item android:id="@+id/nav_info"
-                    android:title="@string/info"
-                    android:icon="@drawable/ic_about"/>
+                <item
+                    android:id="@+id/nav_info"
+                    android:icon="@drawable/ic_about"
+                    android:title="@string/info" />
             </group>
         </menu>
     </item>

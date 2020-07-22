@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="@color/colorPrimary"
@@ -13,13 +14,27 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/app_name"
-        android:textAlignment="viewStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/fui_bgGoogle" />
+        android:layout_marginStart="8dp"
+        android:text="M"
+        android:textColor="@color/fui_bgGoogle"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="B"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -27,5 +42,7 @@
         android:layout_height="wrap_content"
         android:text="@string/books_categories"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/fui_bgGoogle" />
-</LinearLayout>
+        android:textColor="@color/fui_bgGoogle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+</androidx.constraintlayout.widget.ConstraintLayout>
