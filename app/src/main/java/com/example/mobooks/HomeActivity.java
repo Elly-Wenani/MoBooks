@@ -190,6 +190,10 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
                         }).show();
                 break;
 
+            case R.id.nav_rate:
+                rateAppOnPlayStore();
+                break;
+
             case R.id.nav_share:
                 shareApp(getString(R.string.share_message));
                 break;
@@ -207,6 +211,14 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
 
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    private void rateAppOnPlayStore() {
+        Intent rate = new Intent(Intent.ACTION_VIEW);
+        rate.setData(Uri.parse(
+                "https://play.google.com/store/apps/details?id=com.example.android"));
+        rate.setPackage("com.android.vending");
+        startActivity(rate);
     }
 
     private void logOut() {
