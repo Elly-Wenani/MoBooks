@@ -5,7 +5,8 @@
         <shape>
             <gradient
                 android:startColor="@color/colorPrimary"
-                android:useLevel="true" />
+                android:useLevel="true"
+                android:endColor="@android:color/white"/>
         </shape>
     </item>
 </layer-list>

@@ -23,6 +23,7 @@ import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnRenderListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.github.barteksc.pdfviewer.util.Util;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -201,7 +202,7 @@ public class OnlinePdfViewerActivity extends AppCompatActivity {
     private void initSeekBar() {
         mSeekBar = findViewById(R.id.seekBar);
         mSeekBar.setEnabled(false);
-//        mSeekBar.getProgressDrawable().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
+//        mSeekBar.getProgressDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
 //        mSeekBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
