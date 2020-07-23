@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -78,11 +79,13 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
 
         //Show items if admin and hide if not admin
         Menu menu = navigationView.getMenu();
-        if (FirebaseUtil.isAdmin) {
-            menu.findItem(R.id.nav_insert).setVisible(true);
-        } else {
-            menu.findItem(R.id.nav_insert).setVisible(false);
-        }
+        menu.findItem(R.id.nav_insert).setVisible(false);
+
+//        if (FirebaseUtil.isAdmin) {
+//            menu.findItem(R.id.nav_insert).setVisible(true);
+//        } else {
+//            menu.findItem(R.id.nav_insert).setVisible(false);
+//        }
 
         //Populate recycler view
         bookTile = new ArrayList<>();

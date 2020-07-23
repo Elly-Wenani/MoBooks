@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.mobooks.Adapters.OnlineBooksAdapter;
 import com.example.mobooks.BookInsertActivity;
@@ -32,6 +33,7 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
 
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
+    public int admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +61,18 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
 
         //Show items if admin and hide if not admin
         Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_insert).setVisible(false);
+
+//        if (FirebaseUtil.isAdmin) {
+//            menu.findItem(R.id.nav_insert).setVisible(true);
+//        } else {
+//            menu.findItem(R.id.nav_insert).setVisible(false);
+//        }
+
         if (FirebaseUtil.isAdmin) {
-            menu.findItem(R.id.nav_insert).setVisible(true);
+            admin = 1;
         } else {
-            menu.findItem(R.id.nav_insert).setVisible(false);
+            admin = 0;
         }
     }
 
@@ -73,6 +83,27 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.insert_menu, menu);
+
+        if (admin == 1) {
+            menu.findItem(R.id.action_addBook).setVisible(true);
+        } else if(admin == 0) {
+            menu.findItem(R.id.action_addBook).setVisible(false);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_addBook) {
+            Intent insert = new Intent(this, BookInsertActivity.class);
+            startActivity(insert);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
