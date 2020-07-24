@@ -236,33 +236,7 @@ public class LocalPdfViewerActivity extends AppCompatActivity {
                         .load();
                 break;
             case "Power Score":
-                mPDFView.fromAsset("Wealth_Without_Theft_You_can_be_Rich_without_Stealing.pdf")
-                        .defaultPage(0)
-                        .enableAnnotationRendering(true)
-                        .scrollHandle(new DefaultScrollHandle(this))
-                        .spacing(0)
-                        .enableSwipe(true)
-                        .swipeHorizontal(false)
-                        .enableAntialiasing(true)
-                        .onPageError(new OnPageErrorListener() {
-                            @Override
-                            public void onPageError(int page, Throwable t) {
-                                Toast.makeText(getApplicationContext(), "Page error!", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .onError(new OnErrorListener() {
-                            @Override
-                            public void onError(Throwable t) {
-                                Toast.makeText(LocalPdfViewerActivity.this, "Error occurred!", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .onRender(new OnRenderListener() {
-                            @Override
-                            public void onInitiallyRendered(int nbPages, float pageWidth, float pageHeight) {
-                                mPDFView.fitToWidth();
-                            }
-                        })
-                        .load();
+                Toast.makeText(this, "Not available", Toast.LENGTH_SHORT).show();
                 break;
             case "I kissed dating goodbye":
                 mPDFView.fromAsset("I kissed dating goodbye.pdf")

@@ -21,7 +21,9 @@ import com.google.firebase.storage.StorageReference;
 
 
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class BookInsertActivity extends AppCompatActivity {
@@ -33,6 +35,7 @@ public class BookInsertActivity extends AppCompatActivity {
     private EditText insertImageUrl;
     private EditText insertBookUrl;
     private OnlineBooksMode onlineBooksSet;
+    private ProgressBar addProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class BookInsertActivity extends AppCompatActivity {
         insertAuthor = findViewById(R.id.insertAuthor);
         insertImageUrl = findViewById(R.id.insertImageUrl);
         insertBookUrl = findViewById(R.id.insertBookUrl);
+
+        addProgressBar = findViewById(R.id.addProgressBar);
 
         final Intent intent = getIntent();
         OnlineBooksMode books = (OnlineBooksMode) intent.getSerializableExtra("Books");
@@ -128,7 +133,7 @@ public class BookInsertActivity extends AppCompatActivity {
     }
 
     private void deleteBook() {
-            Toast.makeText(this, "To delete book", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "To delete book", Toast.LENGTH_SHORT).show();
     }
 
     private void clearText() {
@@ -139,6 +144,9 @@ public class BookInsertActivity extends AppCompatActivity {
     }
 
     private void saveBook() {
+
+        addProgressBar.setVisibility(View.VISIBLE);
+        disableAllEditText();
 
         onlineBooksSet.setBkTitle(insertBookTitle.getText().toString().trim());
         onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());
@@ -151,6 +159,8 @@ public class BookInsertActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            addProgressBar.setVisibility(View.GONE);
+                            enableAllEditText();
                             Toast.makeText(getApplicationContext(), "Book Saved", Toast.LENGTH_SHORT).show();
                             clearText();
                         }
@@ -158,6 +168,8 @@ public class BookInsertActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            addProgressBar.setVisibility(View.GONE);
+                            enableAllEditText();
                             Toast.makeText(getApplicationContext(), "Failed to save books", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -166,6 +178,8 @@ public class BookInsertActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            addProgressBar.setVisibility(View.GONE);
+                            enableAllEditText();
                             Toast.makeText(getApplicationContext(), "Book Saved", Toast.LENGTH_SHORT).show();
                             clearText();
                         }
@@ -173,9 +187,27 @@ public class BookInsertActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            addProgressBar.setVisibility(View.GONE);
+                            enableAllEditText();
                             Toast.makeText(getApplicationContext(), "Failed to save books", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
+    }
+
+    private void disableAllEditText() {
+
+        insertBookTitle.setEnabled(false);
+        insertAuthor.setEnabled(false);
+        insertImageUrl.setEnabled(false);
+        insertBookUrl.setEnabled(false);
+    }
+
+    private void enableAllEditText() {
+
+        insertBookTitle.setEnabled(true);
+        insertAuthor.setEnabled(true);
+        insertImageUrl.setEnabled(true);
+        insertBookUrl.setEnabled(true);
     }
 }
