@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/fui_bgFacebook</color>
     <color name="colorPrimaryDark">@color/fui_bgGitHub</color>
-    <color name="colorAccent">@color/colorPrimaryDark</color>
+    <color name="colorAccent">@color/fui_bgFacebook</color>
     <color name="colorGreen">#1f1</color>
     <color name="colorRed">#FF0000</color>
 </resources>

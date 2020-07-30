@@ -16,7 +16,7 @@ public class InfoActivity extends AppCompatActivity {
         TextView tvTerms = findViewById(R.id.tvTerms);
         TextView tvDeveloper = findViewById(R.id.tvDeveloper);
         tvInfo.setText(R.string.text_about);
-        tvTerms.setText(R.string.text_about);
-        tvDeveloper.setText(R.string.text_about);
+        tvTerms.setText(R.string.text_terms);
+        tvDeveloper.setText(R.string.text_developer);
     }
 }

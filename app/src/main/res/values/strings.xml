@@ -48,8 +48,45 @@
     <string name="send_us_email">Send Us Email</string>
     <string name="mobooks_email_address">ellywenani@gmail.com</string>
     <string name="mobooks_subject">MoBooks Version 1.0</string>
-    <string name="share_message">Hey, am having great time reading books with this cool app MoBooks. I has great content I recommend you check it out on Google PlayStore</string>
-    <string name="text_about">MoBooks is an application that has a variety of books in different categories. Feel free to share the app with your friends and loved ones to spread knowledge MoBooks is an application that has a variety of books in different categories. Feel free to share the app with your friends and loved ones to spread knowledge MoBooks is an application that has a variety of books  in different categories. Feel free to share the app with your friends and loved ones to spread knowledge</string>
-    <string name="alert_re_load">The previous download was interrupted. Kindly re-open this book again to load!\n Note: Do not interrupt loading process</string>
+    <string name="share_message">Hey, am having great time reading books with this cool app MoBooks.
+        I has great content I recommend you check it out on Google PlayStore
+    </string>
+
+    <string name="text_about">Seeking for knowledge without having a good source of information is a challenge
+        to many people. Online resources has become one of the most source of knowledge in most parts of the
+        world today and due to users demand for this knowledge in books, this application was developed to facilitate
+        access to books at your comfort wherever you are anytime anywhere. The only thing you need to have is an internet
+        connection for books in categories other than most read books.
+        \nMoBooks application contain a variety of books arranged in different categories which make
+        it easier for the person seeking for knowledge in books to make decisions easily on where to get which book.
+        \nWe will try at our level best to improve the contents of books in this application as frequent as we can.
+        We will also be listening to users requests and suggestion on books and general improvement
+        to the application.
+    </string>
+
+    <string name="text_terms">The long term goal of this application is to enable users to easily access books
+        in an easy and more efficient manner. The current study show the challenges users face
+        while searching for books and thus this application will try to provide solutions to this constrains.
+        \nBooks contained in this application are copyright free and those with copyright are included as per
+        the permission from the book owner(s). In case of any copyright infringement for any material here in the
+        application, we will simply remove it from the database.
+        \nIf you have your own book (which you are the author or have relevant rights to the books) and you wish it
+        to be included in this application, then send us an email with the details indicating all relevant
+        information and rights over the book. We will be glad to include it to the contents of this application.
+        \nPornographic and child abuse materials will not be allowed in this application. If you encounter a book
+        that breaks human rights kindly write to us indicating the book title, author and a short description so
+        that we can pull down the book. We rely on your feedback since we are not in a position to read all the
+        content of every book before we upload for our users.
+        \nThis application does not collect users information.
+    </string>
+
+    <string name="text_developer">This application was developed by Elly Wenani, a Software and Application Developer.
+        This being an open source project, developers around the globe are free to contribute to the development
+        of this application so as to improve users experience.
+    </string>
+
+
+    <string name="alert_re_load">The previous download was interrupted. Kindly re-open this book again to load!
+        \nNote: Do not interrupt loading process</string>
     <string name="add_book">Add Book</string>
 </resources>
