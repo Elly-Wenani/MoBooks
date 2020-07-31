@@ -1,11 +1,16 @@
 package com.example.mobooks.Books;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -73,6 +78,8 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         } else {
             admin = 0;
         }
+
+        isConnected();
     }
 
     @Override
@@ -90,7 +97,7 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
 
         if (admin == 1) {
             menu.findItem(R.id.action_addBook).setVisible(true);
-        } else if(admin == 0) {
+        } else if (admin == 0) {
             menu.findItem(R.id.action_addBook).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
@@ -240,6 +247,24 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvBusinessBooks.setLayoutManager(booksLayoutManager);
-        //FirebaseUtil.attachListener();
+    }
+
+    //TODO load a progress bar while items are being fetched from db
+    //Check network status
+    public void isConnected() {
+        try {
+            ConnectivityManager cm =
+                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            if ((activeNetwork != null) &&
+                    activeNetwork.isConnectedOrConnecting()) {
+                //...
+            } else {
+                Toast.makeText(getApplicationContext(), "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Log.e("Connectivity Exemption", e.getMessage());
+        }
     }
 }

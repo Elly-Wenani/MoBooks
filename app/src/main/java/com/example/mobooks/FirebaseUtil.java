@@ -1,6 +1,11 @@
 package com.example.mobooks;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +57,7 @@ public class FirebaseUtil {
 
     //Home openRef Method
     public static void openFbReferenceHome(String ref, final HomeActivity callerActivityHom) {
+        Log.d("HomeBooks: ", "Connection to home books");
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -78,6 +84,7 @@ public class FirebaseUtil {
 
     //This method populates BusinessActivity with business books from firebase database
     public static void openFbReferenceBus(String ref, final BusinessActivity callerActivityBus) {
+        Log.d("BusinessBooks: ", "Connection to business books");
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -104,6 +111,7 @@ public class FirebaseUtil {
 
     //Method populates BiographyActivity with biography books from firebase database
     public static void openFbReferenceBio(String ref, final BiographyActivity callerActivityBio) {
+        Log.d("BiographyBooks: ", "Connection to biography books");
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -130,6 +138,7 @@ public class FirebaseUtil {
 
     //Method populates LeadershipActivity with leadership books from firebase database
     public static void openFbReferenceLea(String ref, final LeadershipActivity callerActivityLea) {
+        Log.d("LeadershipBooks: ", "Connection to leadership books");
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -156,6 +165,7 @@ public class FirebaseUtil {
 
     //Method populates TechnologyActivity with technology books from firebase database
     public static void openFbReferenceTech(String ref, final TechnologyActivity callerActivityTech) {
+        Log.d("TechBooks: ", "Connection to tech books");
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -182,6 +192,7 @@ public class FirebaseUtil {
 
     //Method populates HistoryActivity with history books from firebase database
     public static void openFbReferenceHis(String ref, final HistoryActivity callerActivityHis) {
+        Log.d("HistoryBooks: ", "Connection to history books");
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -208,6 +219,7 @@ public class FirebaseUtil {
 
     //Method populates NovelsActivity with novels from firebase database
     public static void openFbReferenceNov(String ref, final NovelsActivity callerActivityNov) {
+        Log.d("Novels: ", "Connection to novels");
         if (mFirebaseUtil == null) {
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -233,9 +245,11 @@ public class FirebaseUtil {
     }
 
     public static void singIn() {
+        Log.d("SignIn: ", "Signing in the user");
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.GoogleBuilder().build(),
+                new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.PhoneBuilder().build());
 
         // Create and launch sign-in intent
@@ -244,7 +258,7 @@ public class FirebaseUtil {
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
                         .setTheme(R.style.AppTheme_NoActionBar)
-                        .setLogo(R.drawable.logo)
+                        .setLogo(R.drawable.logo1)
                         .build(),
                 RC_SIGN_IN);
     }
@@ -260,8 +274,6 @@ public class FirebaseUtil {
                 FirebaseUtil.isAdmin = true;
                 Log.d("Admin: ", "You are an admin");
                 callerCheck.showMenu();
-                //callerBus.showMenu();
-                //callerBio.showMenu();
             }
 
             @Override
