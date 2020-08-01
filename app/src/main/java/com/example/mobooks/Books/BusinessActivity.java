@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,11 +65,6 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         //Show items if admin and hide if not admin
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.nav_insert).setVisible(false);
-//        if (FirebaseUtil.isAdmin) {
-//            menu.findItem(R.id.nav_insert).setVisible(true);
-//        } else {
-//            menu.findItem(R.id.nav_insert).setVisible(false);
-//        }
 
         if (FirebaseUtil.isAdmin) {
             admin = 1;
@@ -79,7 +72,7 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
             admin = 0;
         }
 
-        isConnected();
+        isConnectingToInternet();
     }
 
     @Override
@@ -249,22 +242,34 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
         rvBusinessBooks.setLayoutManager(booksLayoutManager);
     }
 
-    //TODO load a progress bar while items are being fetched from db
-    //Check network status
-    public void isConnected() {
-        try {
-            ConnectivityManager cm =
-                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            if ((activeNetwork != null) &&
-                    activeNetwork.isConnectedOrConnecting()) {
-                //...
-            } else {
-                Toast.makeText(getApplicationContext(), "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+    public boolean isConnectingToInternet() {
+        if (networkConnectivity()) {
+            try {
+                Process p1 = Runtime.getRuntime().exec(
+                        "ping -c 1 www.google.com");
+                int returnVal = p1.waitFor();
+                boolean reachable = (returnVal == 0);
+                if (reachable) {
+                    return true;
+                } else {
+                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            } catch (Exception e) {
+                return false;
             }
-        } catch (Exception e) {
-            Log.e("Connectivity Exemption", e.getMessage());
+        } else {
+            Toast.makeText(this, "Your data connection is off", Toast.LENGTH_LONG).show();
+            return false;
         }
     }
+
+    private boolean networkConnectivity() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    //TODO load a progress bar while items are being fetched from db
 }

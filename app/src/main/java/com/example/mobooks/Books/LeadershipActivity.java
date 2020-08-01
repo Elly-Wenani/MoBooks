@@ -1,6 +1,9 @@
 package com.example.mobooks.Books;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,17 +66,13 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.nav_insert).setVisible(false);
 
-//        if (FirebaseUtil.isAdmin) {
-//            menu.findItem(R.id.nav_insert).setVisible(true);
-//        } else {
-//            menu.findItem(R.id.nav_insert).setVisible(false);
-//        }
-
         if (FirebaseUtil.isAdmin) {
             admin = 1;
         } else {
             admin = 0;
         }
+
+        isConnectingToInternet();
     }
 
     @Override
@@ -91,7 +90,7 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
 
         if (admin == 1) {
             menu.findItem(R.id.action_addBook).setVisible(true);
-        } else if(admin == 0) {
+        } else if (admin == 0) {
             menu.findItem(R.id.action_addBook).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
@@ -240,5 +239,34 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvLeadershipBooks.setLayoutManager(booksLayoutManager);
+    }
+
+    public boolean isConnectingToInternet() {
+        if (networkConnectivity()) {
+            try {
+                Process p1 = Runtime.getRuntime().exec(
+                        "ping -c 1 www.google.com");
+                int returnVal = p1.waitFor();
+                boolean reachable = (returnVal == 0);
+                if (reachable) {
+                    return true;
+                } else {
+                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            Toast.makeText(this, "Your data connection is off", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    private boolean networkConnectivity() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

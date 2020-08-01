@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -66,12 +65,6 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
         //Show items if admin and hide if not admin
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.nav_insert).setVisible(false);
-
-//        if (FirebaseUtil.isAdmin) {
-//            menu.findItem(R.id.nav_insert).setVisible(true);
-//        } else {
-//            menu.findItem(R.id.nav_insert).setVisible(false);
-//        }
 
         if (FirebaseUtil.isAdmin) {
             admin = 1;
@@ -259,14 +252,14 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
                 if (reachable) {
                     return true;
                 } else {
-                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_LONG).show();
                     return false;
                 }
             } catch (Exception e) {
                 return false;
             }
         } else {
-            Toast.makeText(this, "Turn on data connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Your data connection is off", Toast.LENGTH_LONG).show();
             return false;
         }
     }
