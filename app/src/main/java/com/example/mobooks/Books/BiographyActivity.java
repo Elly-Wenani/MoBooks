@@ -1,6 +1,9 @@
 package com.example.mobooks.Books;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,6 +78,8 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
         } else {
             admin = 0;
         }
+
+        isConnectingToInternet();
     }
 
     @Override
@@ -92,7 +97,7 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
 
         if (admin == 1) {
             menu.findItem(R.id.action_addBook).setVisible(true);
-        } else if(admin == 0) {
+        } else if (admin == 0) {
             menu.findItem(R.id.action_addBook).setVisible(false);
         }
 
@@ -242,5 +247,34 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
         LinearLayoutManager booksLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvBiographyBooks.setLayoutManager(booksLayoutManager);
+    }
+
+    public boolean isConnectingToInternet() {
+        if (networkConnectivity()) {
+            try {
+                Process p1 = Runtime.getRuntime().exec(
+                        "ping -c 1 www.google.com");
+                int returnVal = p1.waitFor();
+                boolean reachable = (returnVal == 0);
+                if (reachable) {
+                    return true;
+                } else {
+                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            Toast.makeText(this, "Turn on data connection", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    private boolean networkConnectivity() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }
