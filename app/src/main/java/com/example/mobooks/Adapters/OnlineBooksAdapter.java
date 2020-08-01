@@ -67,7 +67,7 @@ public class OnlineBooksAdapter extends RecyclerView.Adapter<OnlineBooksAdapter.
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("error: onCancelled: ", "Failed to read value.", error.toException());
+                Log.w("error: onCancelled: ", "Event was cancelled.", error.toException());
             }
         };
         mDatabaseReference.addChildEventListener(mChildEventListener);
