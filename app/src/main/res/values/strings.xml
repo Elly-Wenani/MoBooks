@@ -90,4 +90,5 @@
         \nNote: Do not interrupt loading process</string>
     <string name="add_book">Add Book</string>
     <string name="title_share">Share MoBooks</string>
+    <string name="mail_mobooks">Send email to MoBooks</string>
 </resources>
