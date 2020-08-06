@@ -89,4 +89,5 @@
     <string name="alert_re_load">The previous download was interrupted. Kindly re-open this book again to load!
         \nNote: Do not interrupt loading process</string>
     <string name="add_book">Add Book</string>
+    <string name="title_share">Share MoBooks</string>
 </resources>

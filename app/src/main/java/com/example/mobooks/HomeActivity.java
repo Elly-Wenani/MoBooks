@@ -246,7 +246,7 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
         shareIntent.setType("text/plain");
 
         if (possibleActivityList.size() > 1) {
-            String title = "Share MoBooks";
+            String title = getString(R.string.title_share);
             Intent chooser = Intent.createChooser(shareIntent, title);
             startActivity(chooser);
         } else if (shareIntent.resolveActivity(getPackageManager()) != null) {

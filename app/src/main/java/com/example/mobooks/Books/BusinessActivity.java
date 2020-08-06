@@ -2,6 +2,8 @@ package com.example.mobooks.Books;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -31,6 +33,8 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class BusinessActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -202,9 +206,18 @@ public class BusinessActivity extends AppCompatActivity implements NavigationVie
 
     private void shareApp(String textMessage) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
+
+        List<ResolveInfo> possibleActivityList = getPackageManager()
+                .queryIntentActivities(shareIntent, PackageManager.MATCH_ALL);
+
         shareIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
         shareIntent.setType("text/plain");
-        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+
+        if (possibleActivityList.size() > 1) {
+            String title = getString(R.string.title_share);
+            Intent chooser = Intent.createChooser(shareIntent, title);
+            startActivity(chooser);
+        } else if (shareIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(shareIntent);
         }
     }
