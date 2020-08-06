@@ -2,6 +2,8 @@ package com.example.mobooks;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +38,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter.OnBookClickListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -235,9 +238,18 @@ public class HomeActivity extends AppCompatActivity implements LocalBooksAdapter
 
     private void shareApp(String textMessage) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
+
+        List<ResolveInfo> possibleActivityList = getPackageManager()
+                .queryIntentActivities(shareIntent, PackageManager.MATCH_ALL);
+
         shareIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
         shareIntent.setType("text/plain");
-        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+
+        if (possibleActivityList.size() > 1) {
+            String title = "Share MoBooks";
+            Intent chooser = Intent.createChooser(shareIntent, title);
+            startActivity(chooser);
+        } else if (shareIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(shareIntent);
         }
     }
