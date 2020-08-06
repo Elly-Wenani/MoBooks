@@ -225,11 +225,19 @@ public class LeadershipActivity extends AppCompatActivity implements NavigationV
     // the email
     private void mailTo(String[] emailAddresses, String subject) {
         Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+
+        List<ResolveInfo> possibleActivityList = getPackageManager()
+                .queryIntentActivities(sendEmail, PackageManager.MATCH_ALL);
+
         sendEmail.setData(Uri.parse("mailto:"));
         sendEmail.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
         sendEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
 
-        if (sendEmail.resolveActivity(getPackageManager()) != null) {
+        if (possibleActivityList.size() > 1) {
+            String title = getString(R.string.mail_mobooks);
+            Intent chooser = Intent.createChooser(sendEmail, title);
+            startActivity(chooser);
+        } else if (sendEmail.resolveActivity(getPackageManager()) != null) {
             startActivity(sendEmail);
         }
     }
