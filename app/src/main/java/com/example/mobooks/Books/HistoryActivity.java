@@ -210,7 +210,7 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
                 .queryIntentActivities(shareIntent, PackageManager.MATCH_ALL);
 
         shareIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
-        shareIntent.setType("text/plain");
+        shareIntent.setType("message/rfc2822");
 
         if (possibleActivityList.size() > 1) {
             String title = getString(R.string.title_share);
