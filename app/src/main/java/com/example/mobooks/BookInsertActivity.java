@@ -26,6 +26,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class BookInsertActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
@@ -35,7 +37,7 @@ public class BookInsertActivity extends AppCompatActivity {
     private EditText insertImageUrl;
     private EditText insertBookUrl;
     private OnlineBooksMode onlineBooksSet;
-    private ProgressBar addProgressBar;
+    private SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,6 @@ public class BookInsertActivity extends AppCompatActivity {
         insertImageUrl = findViewById(R.id.insertImageUrl);
         insertBookUrl = findViewById(R.id.insertBookUrl);
 
-        addProgressBar = findViewById(R.id.addProgressBar);
 
         final Intent intent = getIntent();
         OnlineBooksMode books = (OnlineBooksMode) intent.getSerializableExtra("Books");
@@ -106,22 +107,23 @@ public class BookInsertActivity extends AppCompatActivity {
                     insertBookUrl.setError("Enter Book Url");
                     insertBookUrl.requestFocus();
                 } else {
-                    new AlertDialog.Builder(this)
-                            .setTitle("Save Book")
-                            .setMessage("Are you sure you want to save this book?")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this, SweetAlertDialog.NORMAL_TYPE);
+                    sweetAlertDialog.setTitleText("Are you sure?")
+                            .setConfirmButton("Yes", new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //If the admin clicks yes the books will be uploaded to the database
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.hide();
                                     saveBook();
                                 }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //Nothing happens when no is clicked
-                                }
-                            }).show();
+                            }).setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            //Nothing happens when no is clicked
+                            sweetAlertDialog.cancel();
+                        }
+                    }).show();
+
                 }
                 break;
 
@@ -145,8 +147,13 @@ public class BookInsertActivity extends AppCompatActivity {
 
     private void saveBook() {
 
-        addProgressBar.setVisibility(View.VISIBLE);
         disableAllEditText();
+
+        sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this,
+                SweetAlertDialog.PROGRESS_TYPE);
+        sweetAlertDialog.setTitleText("Please wait")
+                .hideConfirmButton()
+                .show();
 
         onlineBooksSet.setBkTitle(insertBookTitle.getText().toString().trim());
         onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());
@@ -159,18 +166,19 @@ public class BookInsertActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            addProgressBar.setVisibility(View.GONE);
+
+                            sweetAlertDialog.hide();
                             enableAllEditText();
-                            Toast.makeText(getApplicationContext(), "Book Saved", Toast.LENGTH_SHORT).show();
+                            isSuccessful();
                             clearText();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            addProgressBar.setVisibility(View.GONE);
+                            sweetAlertDialog.hide();
                             enableAllEditText();
-                            Toast.makeText(getApplicationContext(), "Failed to save books", Toast.LENGTH_SHORT).show();
+                            notSuccessful();
                         }
                     });
         } else {
@@ -178,18 +186,18 @@ public class BookInsertActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            addProgressBar.setVisibility(View.GONE);
+                            sweetAlertDialog.hide();
                             enableAllEditText();
-                            Toast.makeText(getApplicationContext(), "Book Saved", Toast.LENGTH_SHORT).show();
+                            isSuccessful();
                             clearText();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            addProgressBar.setVisibility(View.GONE);
+                            sweetAlertDialog.hide();
                             enableAllEditText();
-                            Toast.makeText(getApplicationContext(), "Failed to save books", Toast.LENGTH_SHORT).show();
+                            notSuccessful();
                         }
                     });
         }
@@ -209,5 +217,21 @@ public class BookInsertActivity extends AppCompatActivity {
         insertAuthor.setEnabled(true);
         insertImageUrl.setEnabled(true);
         insertBookUrl.setEnabled(true);
+    }
+
+    private void isSuccessful() {
+        sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this,
+                SweetAlertDialog.SUCCESS_TYPE);
+        sweetAlertDialog.setTitleText("Successful")
+                .hideConfirmButton()
+                .show();
+    }
+
+    private void notSuccessful() {
+        sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this,
+                SweetAlertDialog.ERROR_TYPE);
+        sweetAlertDialog.setTitleText("Failed")
+                .hideConfirmButton()
+                .show();
     }
 }

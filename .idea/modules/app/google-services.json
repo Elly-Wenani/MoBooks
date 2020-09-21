@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "30423647364",
+    "firebase_url": "https://mobooks-c081c.firebaseio.com",
+    "project_id": "mobooks-c081c",
+    "storage_bucket": "mobooks-c081c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30423647364:android:ef1cbffede98c89f91eed1",
+        "android_client_info": {
+          "package_name": "com.example.mobooks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30423647364-26l93bupufc31ahqtjp92okrh737o3uc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobooks",
+            "certificate_hash": "c767d0a40f1b2546a99d6adb868e6a44762db43a"
+          }
+        },
+        {
+          "client_id": "30423647364-mueoqkuaq9i4hnpkbrojh1oo93pcvlau.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobooks",
+            "certificate_hash": "d3aaee5a29c63730acacbc487544097c1931aa55"
+          }
+        },
+        {
+          "client_id": "30423647364-3f4jpuiaogdjgff9c053pmdb4cdq0afk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHCYQzwo6lSP8W-_scUlicB7gHjaKdDsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30423647364-3f4jpuiaogdjgff9c053pmdb4cdq0afk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

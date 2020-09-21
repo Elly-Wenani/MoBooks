@@ -36,11 +36,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class BiographyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
     public int admin;
+    private SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
