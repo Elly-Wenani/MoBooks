@@ -36,11 +36,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class TechnologyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
     public int admin;
+    private SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -272,14 +275,14 @@ public class TechnologyActivity extends AppCompatActivity implements NavigationV
                 if (reachable) {
                     return true;
                 } else {
-                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_LONG).show();
+                    noInternet();
                     return false;
                 }
             } catch (Exception e) {
                 return false;
             }
         } else {
-            Toast.makeText(this, "Your data connection is off", Toast.LENGTH_LONG).show();
+            noConnection();
             return false;
         }
     }
@@ -289,5 +292,23 @@ public class TechnologyActivity extends AppCompatActivity implements NavigationV
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    //Dialogue for no connection
+    public void noConnection() {
+        sweetAlertDialog = new SweetAlertDialog(TechnologyActivity.this,
+                SweetAlertDialog.ERROR_TYPE);
+        sweetAlertDialog.setTitleText("Your data connection is off")
+                .hideConfirmButton()
+                .show();
+    }
+
+    //Dialogue for no internet
+    public void noInternet() {
+        sweetAlertDialog = new SweetAlertDialog(TechnologyActivity.this,
+                SweetAlertDialog.WARNING_TYPE);
+        sweetAlertDialog.setTitleText("No Internet Access")
+                .hideConfirmButton()
+                .show();
     }
 }

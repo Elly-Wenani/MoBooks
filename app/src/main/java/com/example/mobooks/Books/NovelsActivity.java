@@ -36,11 +36,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class NovelsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
     public int admin;
+    SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +97,7 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
 
         if (admin == 1) {
             menu.findItem(R.id.action_addBook).setVisible(true);
-        } else if(admin == 0) {
+        } else if (admin == 0) {
             menu.findItem(R.id.action_addBook).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
@@ -272,14 +275,14 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
                 if (reachable) {
                     return true;
                 } else {
-                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_LONG).show();
+                    noInternet();
                     return false;
                 }
             } catch (Exception e) {
                 return false;
             }
         } else {
-            Toast.makeText(this, "Your data connection is off", Toast.LENGTH_LONG).show();
+            noConnection();
             return false;
         }
     }
@@ -289,5 +292,23 @@ public class NovelsActivity extends AppCompatActivity implements NavigationView.
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    //Dialogue for no connection
+    public void noConnection() {
+        sweetAlertDialog = new SweetAlertDialog(NovelsActivity.this,
+                SweetAlertDialog.ERROR_TYPE);
+        sweetAlertDialog.setTitleText("Your data connection is off")
+                .hideConfirmButton()
+                .show();
+    }
+
+    //Dialogue for no internet
+    public void noInternet() {
+        sweetAlertDialog = new SweetAlertDialog(NovelsActivity.this,
+                SweetAlertDialog.WARNING_TYPE);
+        sweetAlertDialog.setTitleText("No Internet Access")
+                .hideConfirmButton()
+                .show();
     }
 }

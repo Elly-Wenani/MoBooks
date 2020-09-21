@@ -299,7 +299,7 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
     }
 
     //Dialogue for no connection
-    private void noConnection() {
+    public void noConnection() {
         sweetAlertDialog = new SweetAlertDialog(BiographyActivity.this,
                 SweetAlertDialog.ERROR_TYPE);
         sweetAlertDialog.setTitleText("Your data connection is off")
@@ -308,7 +308,7 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
     }
 
     //Dialogue for no internet
-    private void noInternet() {
+    public void noInternet() {
         sweetAlertDialog = new SweetAlertDialog(BiographyActivity.this,
                 SweetAlertDialog.WARNING_TYPE);
         sweetAlertDialog.setTitleText("No Internet Access")
