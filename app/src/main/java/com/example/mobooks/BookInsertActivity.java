@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -151,9 +152,11 @@ public class BookInsertActivity extends AppCompatActivity {
 
         sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this,
                 SweetAlertDialog.PROGRESS_TYPE);
+//        sweetAlertDialog.getProgressHelper().setBarColor(Color.parseColor("#3B5998"));
         sweetAlertDialog.setTitleText("Please wait")
                 .hideConfirmButton()
-                .show();
+                .setCancelable(false);
+        sweetAlertDialog.show();
 
         onlineBooksSet.setBkTitle(insertBookTitle.getText().toString().trim());
         onlineBooksSet.setBkAuthor(insertAuthor.getText().toString().trim());

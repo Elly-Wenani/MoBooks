@@ -267,23 +267,26 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
     }
 
     public boolean isConnectingToInternet() {
+
         if (networkConnectivity()) {
             try {
                 Process p1 = Runtime.getRuntime().exec(
                         "ping -c 1 www.google.com");
                 int returnVal = p1.waitFor();
                 boolean reachable = (returnVal == 0);
+
                 if (reachable) {
                     return true;
                 } else {
-                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_LONG).show();
+                    noInternet();
+//                    Toast.makeText(this, "No Internet Access", Toast.LENGTH_LONG).show();
                     return false;
                 }
             } catch (Exception e) {
                 return false;
             }
         } else {
-            Toast.makeText(this, "Your data connection is off", Toast.LENGTH_LONG).show();
+            noConnection();
             return false;
         }
     }
@@ -293,5 +296,23 @@ public class BiographyActivity extends AppCompatActivity implements NavigationVi
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    //Dialogue for no connection
+    private void noConnection() {
+        sweetAlertDialog = new SweetAlertDialog(BiographyActivity.this,
+                SweetAlertDialog.ERROR_TYPE);
+        sweetAlertDialog.setTitleText("Your data connection is off")
+                .hideConfirmButton()
+                .show();
+    }
+
+    //Dialogue for no internet
+    private void noInternet() {
+        sweetAlertDialog = new SweetAlertDialog(BiographyActivity.this,
+                SweetAlertDialog.WARNING_TYPE);
+        sweetAlertDialog.setTitleText("No Internet Access")
+                .hideConfirmButton()
+                .show();
     }
 }
