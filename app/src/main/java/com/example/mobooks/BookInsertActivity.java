@@ -23,6 +23,7 @@ import com.google.firebase.storage.StorageReference;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class BookInsertActivity extends AppCompatActivity {
     private EditText insertBookUrl;
     private OnlineBooksMode onlineBooksSet;
     private SweetAlertDialog sweetAlertDialog;
+    private Button btnSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class BookInsertActivity extends AppCompatActivity {
         insertAuthor = findViewById(R.id.insertAuthor);
         insertImageUrl = findViewById(R.id.insertImageUrl);
         insertBookUrl = findViewById(R.id.insertBookUrl);
+        btnSave = findViewById(R.id.btnSave);
 
 
         final Intent intent = getIntent();
@@ -67,6 +70,67 @@ public class BookInsertActivity extends AppCompatActivity {
         insertAuthor.setText(books.getBkAuthor());
         insertImageUrl.setText(books.getBkImageUrl());
         insertBookUrl.setText(books.getBkFileUrl());
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Verify();
+            }
+        });
+    }
+
+    public void Verify() {
+        String title = insertBookTitle.getText().toString();
+        String author = insertAuthor.getText().toString();
+        String imageUrl = insertImageUrl.getText().toString();
+        String bookUrl = insertBookUrl.getText().toString();
+
+        if (title.isEmpty() && author.isEmpty() && imageUrl.isEmpty() && bookUrl.isEmpty()) {
+
+            sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this,
+                    SweetAlertDialog.ERROR_TYPE);
+            sweetAlertDialog.setTitleText("Fields cant be empty")
+                    .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            insertBookTitle.requestFocus();
+                            sweetAlertDialog.cancel();
+                            insertBookTitle.setError("Enter Book Title");
+                        }
+                    })
+                    .show();
+
+        } else if (title.isEmpty()) {
+            insertBookTitle.setError("Enter Book Title");
+            insertBookTitle.requestFocus();
+        } else if (author.isEmpty()) {
+            insertAuthor.setError("Enter Book Author");
+            insertAuthor.requestFocus();
+        } else if (imageUrl.isEmpty()) {
+            insertImageUrl.setError("Enter Image Url");
+            insertImageUrl.requestFocus();
+        } else if (bookUrl.isEmpty()) {
+            insertBookUrl.setError("Enter Book Url");
+            insertBookUrl.requestFocus();
+        } else {
+
+            sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this, SweetAlertDialog.NORMAL_TYPE);
+            sweetAlertDialog.setTitleText("Are you sure?")
+                    .setConfirmButton("Yes", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.hide();
+                            saveBook();
+                        }
+                    }).setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    //Nothing happens when no is clicked
+                    sweetAlertDialog.cancel();
+                }
+            }).show();
+
+        }
     }
 
     @Override
@@ -78,55 +142,6 @@ public class BookInsertActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_save:
-
-                String title = insertBookTitle.getText().toString();
-                String author = insertAuthor.getText().toString();
-                String imageUrl = insertImageUrl.getText().toString();
-                String bookUrl = insertBookUrl.getText().toString();
-
-                if (title.isEmpty() && author.isEmpty() && imageUrl.isEmpty() && bookUrl.isEmpty()) {
-                    new AlertDialog.Builder(this)
-                            .setTitle("MoBooks")
-                            .setMessage("Fields cant be empty")
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(getApplicationContext(), "Enter book details", Toast.LENGTH_SHORT).show();
-                                }
-                            }).show();
-                } else if (title.isEmpty()) {
-                    insertBookTitle.setError("Enter Book Title");
-                    insertBookTitle.requestFocus();
-                } else if (author.isEmpty()) {
-                    insertAuthor.setError("Enter Book Author");
-                    insertAuthor.requestFocus();
-                } else if (imageUrl.isEmpty()) {
-                    insertImageUrl.setError("Enter Image Url");
-                    insertImageUrl.requestFocus();
-                } else if (bookUrl.isEmpty()) {
-                    insertBookUrl.setError("Enter Book Url");
-                    insertBookUrl.requestFocus();
-                } else {
-
-                    sweetAlertDialog = new SweetAlertDialog(BookInsertActivity.this, SweetAlertDialog.NORMAL_TYPE);
-                    sweetAlertDialog.setTitleText("Are you sure?")
-                            .setConfirmButton("Yes", new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    sweetAlertDialog.hide();
-                                    saveBook();
-                                }
-                            }).setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            //Nothing happens when no is clicked
-                            sweetAlertDialog.cancel();
-                        }
-                    }).show();
-
-                }
-                break;
 
             case R.id.action_delete:
                 deleteBook();

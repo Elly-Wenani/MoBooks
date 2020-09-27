@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "30423647364-ips3ki39oehc8k7fttiv8v1j8sg535p7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mobooks",
-            "certificate_hash": "5882743fb360974b26d9b6cb04b0096f20257a43"
-          }
-        },
-        {
           "client_id": "30423647364-26l93bupufc31ahqtjp92okrh737o3uc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
